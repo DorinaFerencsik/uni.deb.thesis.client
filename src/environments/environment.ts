@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  // TODO: these will be even more separated when there will be modules insides the microservice
+  authApi: 'http://localhost:3000/',
+  userApi: 'http://localhost:3100/',
+  diagramApi: 'http://localhost:3300/',
 };
 
 /*
