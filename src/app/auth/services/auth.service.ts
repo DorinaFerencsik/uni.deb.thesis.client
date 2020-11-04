@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { ILoginPayload } from 'src/utils/payloads/auth';
+
+import { LoginDialogComponent } from '../components/login-dialog/login-dialog.component';
 
 import { ApiAuthService } from './api-auth.service';
 
@@ -11,17 +15,18 @@ export class AuthService {
   private user$ = new BehaviorSubject<any>(null);
 
   constructor(
-    private apiService: ApiAuthService) { }
+    private apiService: ApiAuthService,
+    private dialog: MatDialog
+  ) { }
 
 
+  // TODO handle errors
   public login(): Observable<any> {
-    const id = Math.floor(Math.random() * (10 - 1) + 2);
-    return this.apiService
-      .getUser(id)
+    return this.dialog.open(LoginDialogComponent)
+      .afterClosed()
       .pipe(
-        tap(user => this.user$.next(user)
-      )
-    );
+        switchMap(cred => cred ? this.authenticate(cred) : of(null))
+      );
   }
 
   public logout() {
@@ -34,6 +39,23 @@ export class AuthService {
 
   public getUserDetail(): any {
     return this.user$.getValue();
+  }
+
+  private authenticate(credentials: ILoginPayload) {
+    return this.apiService.authenticate(credentials).pipe(
+      tap(response => {
+        this.user$.next(response.user);
+        this.updateTokens(response.accessToken, response.refreshToken);
+      }),
+      map(() => of(null))
+    );
+  }
+
+  private updateTokens(accessToken: string, refreshToken?: string) {
+    localStorage.setItem('accessToken', accessToken);
+    if (refreshToken) {
+      localStorage.setItem('refreshToken', refreshToken);
+    }
   }
 
 }

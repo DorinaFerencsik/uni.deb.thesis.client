@@ -18,35 +18,27 @@ export interface IRequestOptions {
   providedIn: 'root',
 })
 export class CustomHttpClient {
-  // tslint:disable-next-line: variable-name
-  private _apiUrl: string;
-  public set apiUrl(value) {
-    if (environment[value]) {
-      this._apiUrl = environment[value];
-    } else {
-      throw new Error('Api is not present in environment');
-    }
-  }
-  public get apiUrl() {
-    return this._apiUrl;
-  }
 
   constructor(private http: HttpClient) {}
 
-  public get<T>(endPoint: string, options?: IRequestOptions): Observable<T> {
-    return this.http.get<T>(this.apiUrl + endPoint, options);
+  public get<T>(apiUrl: string, endPoint: string, options?: IRequestOptions): Observable<T> {
+    const api = environment[apiUrl];
+    return this.http.get<T>(api + endPoint, options);
   }
 
-  public post<T>(endPoint: string, params?: object, options?: IRequestOptions): Observable<T> {
-    return this.http.post<T>(this.apiUrl + endPoint, params, options);
+  public post<T>(apiUrl: string, endPoint: string, params?: object, options?: IRequestOptions): Observable<T> {
+    const api = environment[apiUrl];
+    return this.http.post<T>(api + endPoint, params, options);
   }
 
-  public put<T>(endPoint: string, params?: object, options?: IRequestOptions): Observable<T> {
-    return this.http.put<T>(this.apiUrl + endPoint, params, options);
+  public put<T>(apiUrl: string, endPoint: string, params?: object, options?: IRequestOptions): Observable<T> {
+    const api = environment[apiUrl];
+    return this.http.put<T>(api + endPoint, params, options);
   }
 
-  public delete<T>(endPoint: string, options?: IRequestOptions): Observable<T> {
-    return this.http.delete<T>(this.apiUrl + endPoint, options);
+  public delete<T>(apiUrl: string, endPoint: string, options?: IRequestOptions): Observable<T> {
+    const api = environment[apiUrl];
+    return this.http.delete<T>(api + endPoint, options);
   }
 }
 

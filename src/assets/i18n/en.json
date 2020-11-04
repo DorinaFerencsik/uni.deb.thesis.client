@@ -16,7 +16,10 @@
     "LOGIN": "Login",
     "LOGOUT": "Logout",
     "LOGIN_DIALOG": {
-      "TITLE": "You need to log in to access this function"
+      "FIELD": {
+        "EMAIL": "Email address",
+        "PASSWORD": "Password"
+      }
     }
   }
 }

@@ -8,12 +8,12 @@ import { CustomHttpClient } from 'src/app/core/services/custom-http-client.servi
 })
 export class ApiLandingService {
 
-  constructor(private httpClient: CustomHttpClient) {
-    this.httpClient.apiUrl = 'diagramApi';
-  }
+  private apiUrl = 'diagramApi';
+
+  constructor(private httpClient: CustomHttpClient) { }
 
   public getBasic(): Observable<any> {
-    return this.httpClient.get('');
+    return this.httpClient.get(this.apiUrl, '');
   }
 
 }

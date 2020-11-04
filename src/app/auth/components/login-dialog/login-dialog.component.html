@@ -1,0 +1,40 @@
+<div mat-dialog-content>
+  <form [formGroup]="formGroup" fxLayout="column">
+    <mat-form-field>
+      <mat-label>{{ 'AUTH.LOGIN_DIALOG.FIELD.EMAIL' | translate }}</mat-label>
+      <input matInput formControlName="email">
+      <mat-error *ngIf="formGroup.get('email').hasError('required')">
+        {{ 'COMMON.ERROR.REQUIRED' | translate }}
+      </mat-error>
+      <mat-error *ngIf="formGroup.get('email').hasError('maxlength')">
+        {{ 'COMMON.ERROR.MAX_LENGTH' | translate: { max: 50 } }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>{{ 'AUTH.LOGIN_DIALOG.FIELD.PASSWORD' | translate }}</mat-label>
+      <input matInput formControlName="password" type="password">
+      <mat-error *ngIf="formGroup.get('password').hasError('required')">
+        {{ 'COMMON.ERROR.REQUIRED' | translate }}
+      </mat-error>
+      <mat-error *ngIf="formGroup.get('password').hasError('maxlength')">
+        {{ 'COMMON.ERROR.MAX_LENGTH' | translate: { max: 250 } }}
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button
+    mat-stroked-button
+    mat-dialog-close>
+    {{ 'COMMON.BUTTON.CANCEL' | translate }}
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="!formGroup.valid"
+    (click)="login()">
+    {{ 'AUTH.LOGIN' | translate }}
+  </button>
+</div>
