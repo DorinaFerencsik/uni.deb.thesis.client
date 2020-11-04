@@ -1,7 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
@@ -21,8 +23,10 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CommonModule,
     CoreModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     HighlightModule,
     FlexLayoutModule,
     TranslateModule.forRoot({

@@ -1,0 +1,35 @@
+@import '~@angular/material/theming';
+@import '_variables';
+
+@include mat-core();
+
+// LIGHT theme
+$ninjablog-light-primary: mat-palette($mat-green);
+$ninjablog-light-accent: mat-palette($mat-orange, A200, A100, A400);
+$ninjablog-light-warn: mat-palette($mat-red);
+
+$ninjablog-light-theme: mat-light-theme(
+  $ninjablog-light-primary,
+  $ninjablog-light-accent,
+  $ninjablog-light-warn,
+);
+
+@mixin component-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  a {
+    color: mat-color($accent);
+  }
+
+}
+
+@include angular-material-theme($ninjablog-light-theme);
+
+.background {
+  background-color: $background;
+
+  &-secondary {
+    background-color: $background-secondary;
+  }
+}

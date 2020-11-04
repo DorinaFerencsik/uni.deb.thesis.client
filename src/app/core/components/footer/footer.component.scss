@@ -1,0 +1,22 @@
+@import '_media-queries';
+
+:host {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.footer {
+  height: 50px;
+  background-color: #414141;
+  color: white;
+  padding: 0 20px;
+  font-size: 0.85em;
+
+  @include xs {
+    height: 40px;
+    padding: 0 10px;
+  }
+}

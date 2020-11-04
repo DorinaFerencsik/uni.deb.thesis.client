@@ -4,9 +4,12 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { TranslateModule } from '@ngx-translate/core';
 import { HighlightModule, HIGHLIGHT_OPTIONS,  } from 'ngx-highlightjs';
 
@@ -21,9 +24,12 @@ const vendorModules = [
   FlexLayoutModule,
   HighlightModule,
   MatButtonModule,
+  MatCardModule,
   MatIconModule,
   MatInputModule,
   MatMenuModule,
+  MatSlideToggleModule,
+  MatToolbarModule,
   ReactiveFormsModule,
   TranslateModule,
 ];

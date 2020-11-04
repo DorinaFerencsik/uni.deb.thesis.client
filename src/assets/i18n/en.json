@@ -1,0 +1,22 @@
+{
+  "COMMON": {
+    "BUTTON": {
+      "CLOSE": "Close",
+      "CANCEL": "Cancel",
+      "CREATE": "Create",
+      "DARK_MODE": "Dark mode"
+    },
+    "ERROR": {
+      "REQUIRED": "Required field",
+      "MAX_LENGTH": "Exceeds max. length of {{max}} characters"
+    }
+  },
+  "AUTH": {
+    "GREETING": "Hi, ",
+    "LOGIN": "Login",
+    "LOGOUT": "Logout",
+    "LOGIN_DIALOG": {
+      "TITLE": "You need to log in to access this function"
+    }
+  }
+}
