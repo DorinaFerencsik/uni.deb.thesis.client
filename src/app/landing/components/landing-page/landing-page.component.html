@@ -1,0 +1,20 @@
+<div class="headline" fxLayout="column" fxLayoutAlign="center center">
+  <h1>Headline lorem ipsum</h1>
+  <p>Description lorem ipsum</p>
+  <button mat-stroked-button >Call to action</button>
+</div>
+
+<div class="content">
+  <div class="example" fxLayout="row" fxLayoutGap="20px">
+    <app-code-block
+      fxFlex="40"
+      [code]="source"
+    ></app-code-block>
+    <div fxFlex="60">
+      <img *ngIf="imageSrc" [src]="imageSrc" class="diagram"/>
+    </div>
+  </div>
+  <div class="coming-soon" fxLayout="column" fxLayoutAlign="center center">
+    <h2>More coming soon...</h2>
+  </div>
+</div>

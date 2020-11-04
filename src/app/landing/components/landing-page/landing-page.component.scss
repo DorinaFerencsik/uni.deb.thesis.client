@@ -1,0 +1,25 @@
+
+.headline {
+  background-color: #0277bd;
+  color: white;
+  height: 400px;
+  position: relative;
+  margin-bottom: 65px;
+
+  &::before {
+    font-family: "Material Icons";
+    content: "\E26A";
+    position: absolute;
+    bottom: -62px;
+    right: 23%;
+    display: block;
+    color: rgb(255 255 255 / 0.66);
+    font-size: 19em;
+
+  }
+}
+
+.coming-soon {
+  color: #0277bd;
+  height: 200px;
+}
