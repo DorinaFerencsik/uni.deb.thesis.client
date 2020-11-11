@@ -9,8 +9,9 @@
     "lint": "ng lint",
     "lint:staged": "lint --staged",
     "submod:init": "git submodule init",
-    "submod:update": "git submodule foreach git pull origin master",
-    "e2e": "ng e2e"
+    "submod:update": "git submodule update",
+    "e2e": "ng e2e",
+    "build:lib": "ng build client-utils"
   },
   "lint-staged": {
     "*.ts": [
@@ -25,6 +26,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/build-ng-packagr": "~0.1002.0",
     "@angular/animations": "~9.1.11",
     "@angular/cdk": "^9.2.4",
     "@angular/common": "~9.1.11",
@@ -41,10 +43,13 @@
     "@ngx-translate/core": "~12.1.2",
     "@ngx-translate/http-loader": "~5.0.0",
     "husky": "~4.3.0",
+    "ng-packagr": "~9.1.5",
     "ngx-highlightjs": "~4.1.2",
     "rxjs": "~6.5.4",
+    "tsickle": "~0.39.1",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "client-utils": "file:dist/client-utils"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.9",

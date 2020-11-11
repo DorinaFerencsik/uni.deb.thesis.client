@@ -141,6 +141,21 @@
           }
         }
       }
-    }},
+    },
+    "client-utils": {
+      "root": "client-utils",
+      "sourceRoot": "client-utils/src",
+      "projectType": "library",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "client-utils/tsconfig.json",
+            "project": "client-utils/ng-package.json"
+          }
+        }
+      }
+    }
+  },
   "defaultProject": "uni-deb-thesis-client"
 }

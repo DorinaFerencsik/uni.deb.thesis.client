@@ -12,6 +12,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { TranslateModule } from '@ngx-translate/core';
+import { InfoCardModule } from 'client-utils/src/public-api';
 import { HighlightModule, HIGHLIGHT_OPTIONS,  } from 'ngx-highlightjs';
 
 import { CodeBlockComponent } from './components/code-block/code-block.component';
@@ -34,6 +35,7 @@ const vendorModules = [
   MatToolbarModule,
   ReactiveFormsModule,
   TranslateModule,
+  InfoCardModule,
 ];
 
 @NgModule({

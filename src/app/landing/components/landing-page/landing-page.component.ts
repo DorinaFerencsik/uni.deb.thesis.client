@@ -29,4 +29,8 @@ export class LandingPageComponent implements OnInit {
       ).subscribe();
   }
 
+  public actionTest() {
+    console.log('action clicked!');
+  }
+
 }

@@ -6,10 +6,18 @@
 
 <div class="content">
   <div class="example" fxLayout="row" fxLayoutGap="20px">
-    <app-code-block
-      fxFlex="40"
-      [code]="source"
-    ></app-code-block>
+    <div fxLayout="column" 
+    fxFlex="40">
+      <app-code-block
+        [code]="source"
+      ></app-code-block>
+      <thesis-info-card
+        title="Landing info title"
+        info="Lorem ipsum dolor sit amet..."
+        actionLabel="Click me"
+        (action)="actionTest()"
+      ></thesis-info-card>
+    </div>
     <div fxFlex="60">
       <img *ngIf="imageSrc" [src]="imageSrc" class="diagram"/>
     </div>

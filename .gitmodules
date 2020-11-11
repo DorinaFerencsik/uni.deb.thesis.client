@@ -1,3 +1,6 @@
 [submodule "src/utils"]
 	path = src/utils
 	url = https://github.com/dorinaferencsik/uni.deb.thesis.utils
+[submodule "client-utils"]
+	path = client-utils
+	url = git@github.com:DorinaFerencsik/client-utils.git
