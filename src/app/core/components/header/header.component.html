@@ -1,0 +1,24 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+  <div class="logo">Welcome</div>
+  <div>
+    <button mat-stroked-button color="primary" [matMenuTriggerFor]="menu">
+      <span *ngIf="(user$ | async) as user" class="greeting">{{ 'AUTH.GREETING' | translate }} {{user.username}}</span>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item *ngIf="!(user$ | async); else logout" (click)="onLogin()">
+        {{ 'AUTH.LOGIN' | translate }}
+      </button>
+      <ng-template #logout>
+        <button mat-menu-item (click)="onLogout()">
+          {{ 'AUTH.LOGOUT' | translate }}
+        </button>
+      </ng-template>
+      <!-- <button mat-menu-item>
+        <mat-slide-toggle (change)="toggleDarkMode($event)" (click)="$event.stopPropagation();">
+          {{ 'COMMON.BUTTON.DARK_MODE' | translate }}
+        </mat-slide-toggle>
+      </button> -->
+    </mat-menu>
+  </div>
+</mat-toolbar>

@@ -1,0 +1,22 @@
+{
+  "COMMON": {
+    "BUTTON": {
+      "CLOSE": "Bezárás",
+      "CANCEL": "Mégse",
+      "CREATE": "Létrehozás",
+      "DARK_MODE": "Sötét mód"
+    },
+    "ERROR": {
+      "REQUIRED": "Kötelező mező",
+      "MAX_LENGTH": "Meghaladja a max. {{max}} karaktert"
+    }
+  },
+  "AUTH": {
+    "GREETING": "Üdv, ",
+    "LOGIN": "Bejelentkezés",
+    "LOGOUT": "Kijelentkezés",
+    "LOGIN_DIALOG": {
+      "TITLE": "A funkció eléréséhez be kell jelentkeznie"
+    }
+  }
+}

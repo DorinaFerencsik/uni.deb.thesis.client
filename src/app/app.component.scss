@@ -1,0 +1,14 @@
+@import '_media-queries';
+
+.app-container {
+  min-width: 100%;
+  min-height: 100%;
+
+  .content-wrapper {
+    padding: 64px 0;
+
+    @include xs {
+      padding: 56px 0;
+    }
+  }
+}

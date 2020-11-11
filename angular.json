@@ -28,9 +28,17 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/highlight.js/styles/github.css"
+              "src/styles/styles.scss",
+              "src/styles/_media-queries.scss",
+              "src/styles/_theme.scss",
+              "src/styles/_variables.scss",
+              "node_modules/highlight.js/styles/androidstudio.css"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -93,9 +101,17 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "../node_modules/highlight.js/styles/github.css",
+              "src/styles/styles.scss",
+              "src/styles/_media-queries.scss",
+              "src/styles/_theme.scss",
+              "src/styles/_variables.scss",
+              "../node_modules/highlight.js/styles/androidstudio.css"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
             "scripts": []
           }
         },
