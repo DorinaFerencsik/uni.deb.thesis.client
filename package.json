@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "lint:staged": "lint --staged",
     "submod:init": "git submodule init",
-    "submod:update": "git submodule update",
+    "submod:update": "git submodule update --remote",
     "e2e": "ng e2e",
     "build:lib": "ng build client-utils"
   },

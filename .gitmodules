@@ -4,3 +4,4 @@
 [submodule "client-utils"]
 	path = client-utils
 	url = git@github.com:DorinaFerencsik/client-utils.git
+	branch = dev
