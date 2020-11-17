@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
@@ -11,7 +12,10 @@ export class HeaderComponent {
 
   public user$: Subject<any>;
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.user$ = this.authService.getUser();
   }
 
@@ -21,5 +25,6 @@ export class HeaderComponent {
 
   public onLogout() {
     this.authService.logout();
+    this.router.navigate(['landing']);
   }
 }
