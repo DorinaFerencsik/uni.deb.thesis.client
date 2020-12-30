@@ -4,10 +4,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { Base64 } from 'js-base64';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { ITokenPayload } from 'src/utils/interfaces/auth';
+import { ITokenPayload } from 'src/utils/payloads/auth';
 import { IBasicUser } from 'src/utils/interfaces/user';
 import { ILoginPayload } from 'src/utils/payloads/auth';
-import { Errors } from 'utils/enums/common';
+import { Errors } from 'src/utils/enums/common';
 
 import { LoginDialogComponent } from '../components/login-dialog/login-dialog.component';
 
@@ -66,7 +66,7 @@ export class AuthService {
       );
   }
 
-  public getUser(): BehaviorSubject<any> {
+  public getUser(): BehaviorSubject<IBasicUser> {
     return this.user$;
   }
 

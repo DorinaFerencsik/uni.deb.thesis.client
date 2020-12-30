@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CustomHttpClient } from 'src/app/core/services/custom-http-client.service';
 import { ILoginPayload, ILoginResponse } from 'src/utils/payloads/auth';
-import { IAccessToken } from 'utils/interfaces/auth';
+import { IAccessToken } from 'src/utils/interfaces/auth';
 
 @Injectable({
   providedIn: 'root',

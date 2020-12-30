@@ -13,6 +13,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { TranslateModule } from '@ngx-translate/core';
 import { HighlightModule, HIGHLIGHT_OPTIONS,  } from 'ngx-highlightjs';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 import { CodeBlockComponent } from './components/code-block/code-block.component';
 
@@ -40,6 +41,7 @@ const vendorModules = [
   declarations: [components],
   imports: [
     CommonModule,
+    NgxPermissionsModule.forChild(),
     ...vendorModules,
   ],
   providers: [
@@ -57,6 +59,7 @@ const vendorModules = [
   exports: [
     ...components,
     CommonModule,
+    NgxPermissionsModule,
     ...vendorModules,
   ],
 })
