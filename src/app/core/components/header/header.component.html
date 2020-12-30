@@ -1,5 +1,16 @@
 <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
-  <div class="logo">Welcome</div>
+  <div fxLayout="row" >
+    <div class="logo">Welcome</div>
+    
+    <ng-container *ngFor="let item of menuItems">
+      <button
+        mat-button
+        *ngxPermissionsOnly="item.roles"
+        [routerLink]="item.url">
+        {{ item.label }}
+      </button>
+    </ng-container>
+  </div>
   <div>
     <button mat-stroked-button color="primary" [matMenuTriggerFor]="menu">
       <span *ngIf="(user$ | async) as user" class="greeting">{{ 'AUTH.GREETING' | translate }} {{user.username}}</span>
