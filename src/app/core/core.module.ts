@@ -1,6 +1,7 @@
 import { OverlayModule} from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -19,6 +20,7 @@ const components = [
   imports: [
     OverlayModule,
     SharedModule,
+    NgxPermissionsModule.forChild(),
   ],
   exports: [
     ...components,
