@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { IBasicDiagram } from 'utils/interfaces/diagram/basic-diagram.interface';
+
+import { ApiDiagramService } from '../../services/api-diagram.service';
 
 @Component({
   selector: 'app-example-list',
@@ -7,7 +11,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExampleListComponent implements OnInit {
 
-  constructor() { }
+  public diagrams$: Observable<IBasicDiagram[]>;
+
+  constructor(private apiService: ApiDiagramService) {
+    this.diagrams$ = this.apiService.getDiagramTypeList({});
+  }
 
   ngOnInit(): void {
   }

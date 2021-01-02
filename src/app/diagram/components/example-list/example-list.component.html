@@ -1,1 +1,13 @@
-<p>example-list works!</p>
+<div class="content">
+  <ng-container *ngFor="let diagram of (diagrams$ | async); let i = index">
+    <app-diagram-card
+      [id]="diagram._id"
+      [name]="diagram.name"
+      [desc]="diagram.desc"
+      [image]="'/assets/images/examples/' + diagram.type + '.png'"
+      [tags]="diagram.tags" 
+      [order]="i % 2 == 0 ? 'row' : 'row-reverse'"
+    ></app-diagram-card>
+    <app-space></app-space>
+  </ng-container>
+</div>

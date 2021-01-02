@@ -1,1 +1,20 @@
-<p>diagram-card works!</p>
+<div class="card" [fxLayout]="order" fxLayoutGap="20px">
+  <div fxFlex="30" class="image-container">
+    <img [src]="image" fallback="/assets/images/placeholder.png" class="img"/>
+  </div>
+  <div fxFlex="70">
+    <h2>{{name}}</h2>
+    <mat-chip-list [selectable]="false" *ngIf="tags">
+      <mat-chip  [selectable]="false"  *ngFor="let tag of tags" color="primary">{{tag}}</mat-chip>
+    </mat-chip-list>
+    <p>{{desc}}</p>
+    <div *ngIf="params && params.length; else actions">
+      <p *ngFor="let param of params">{{param.name}}: {{param.default}}</p>
+    </div>
+    <ng-template #actions>
+      <button mat-button>Details</button>
+      <button mat-button (click)="createFromType()">Use this</button>
+    </ng-template>
+  </div>
+</div>
+
