@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { keys as _keys } from 'lodash';
 import { Observable } from 'rxjs';
 import { CustomHttpClient } from 'src/app/core/services/custom-http-client.service';
-import { DiagramType } from 'src/utils/enums/diagram/diagram-types.enum';
+import { DiagramTypeEnum } from 'src/utils/enums/diagram/diagram-types.enum';
 import { IGenerateDiagramPayload, IGenerateDiagramResponse } from 'src/utils/payloads/diagram';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class ApiLandingService {
   private apiUrl = 'diagramApi';
 
   private defaulGeneratePayload: IGenerateDiagramPayload = {
-    type: DiagramType.example,
+    type: DiagramTypeEnum.example,
     filename: 'file name.csv',
     csvSeparator: '|',
     axisX: 'total_bill',
