@@ -43,6 +43,7 @@
     "husky": "~4.3.0",
     "js-base64": "~3.6.0",
     "lodash": "~4.17.20",
+    "ngx-filesize": "^2.0.16",
     "ngx-highlightjs": "~4.1.2",
     "ngx-permissions": "^8.1.1",
     "rxjs": "~6.5.4",

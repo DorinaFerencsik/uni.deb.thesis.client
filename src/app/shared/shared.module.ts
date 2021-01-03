@@ -1,5 +1,5 @@
 import { ClipboardModule } from '@angular/cdk/clipboard';
-import {CdkTableModule} from '@angular/cdk/table';
+import { CdkTableModule } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -13,22 +13,33 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { TranslateModule } from '@ngx-translate/core';
-import { HighlightModule, HIGHLIGHT_OPTIONS,  } from 'ngx-highlightjs';
+import { NgxFilesizeModule } from 'ngx-filesize';
+import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { NgxPermissionsModule } from 'ngx-permissions';
 
 import { CodeBlockComponent } from './components/code-block/code-block.component';
+import { FileContentComponent } from './components/file-content/file-content.component';
+import { FileListComponent } from './components/file-list/file-list.component';
 import { SpaceComponent } from './components/space/space.component';
 import { ImageFallbackDirective } from './directives/image-fallback.directive';
+import { FormatDatePipe } from './pipes/format-date.pipe';
 
 const components = [
   CodeBlockComponent,
   SpaceComponent,
+  FileListComponent,
+  FileContentComponent,
 ];
 
 const directives = [
   ImageFallbackDirective,
+];
+
+const pipes = [
+  FormatDatePipe,
 ];
 
 const vendorModules = [
@@ -45,7 +56,9 @@ const vendorModules = [
   MatMenuModule,
   MatSlideToggleModule,
   MatTableModule,
+  MatTabsModule,
   MatToolbarModule,
+  NgxFilesizeModule,
   ReactiveFormsModule,
   TranslateModule,
 ];
@@ -54,6 +67,7 @@ const vendorModules = [
   declarations: [
     ...components,
     ...directives,
+    ...pipes,
   ],
   imports: [
     CommonModule,
@@ -75,6 +89,7 @@ const vendorModules = [
   exports: [
     ...components,
     ...directives,
+    ...pipes,
     CommonModule,
     NgxPermissionsModule,
     ...vendorModules,

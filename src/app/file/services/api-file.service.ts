@@ -20,4 +20,17 @@ export class ApiFileService {
     return this.httpClient.get(this.apiUrl, 'file', { params });
   }
 
+  public readExampleFile(filename: string): Observable<any> {
+    const params = new HttpParams().append('filename', filename);
+    return this.httpClient.get(this.apiUrl, 'file/example', { params });
+  }
+
+  public listUserFiles(): Observable<any> {
+    return this.httpClient.get(this.apiUrl, 'file/list');
+  }
+
+  public listExampleFiles(): Observable<any> {
+    return this.httpClient.get(this.apiUrl, 'file/example/list');
+  }
+
 }

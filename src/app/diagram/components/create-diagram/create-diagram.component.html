@@ -1,1 +1,38 @@
-<p>create-diagram works!</p>
+<div class="content" *ngIf="diagramType">
+  
+  <app-diagram-card
+    [id]="diagramType._id"
+    [name]="diagramType.name"
+    [desc]="diagramType.desc"
+    [image]="'/assets/images/examples/' + diagramType.type + '.png'"
+    [tags]="diagramType.tags"
+    [params]="diagramType.params"
+    order="row"
+  ></app-diagram-card>
+  <app-space></app-space>
+
+  <app-file-content [value]="exampleFile"></app-file-content>
+  <app-space></app-space>
+
+  <div>Inputs for params</div>
+  <div>
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="Use example file">
+        <app-file-list [dataSource]="(exampleFileList$ | async)"></app-file-list>
+      </mat-tab>
+      <mat-tab label="Use own file">
+        <div class="own-file-container" fxLayout="row" fxLayoutAlign="space-evenly center">
+
+          <div class="upload-area" fxFlex="40">
+            <p>Upload file</p>
+          </div>
+          <div class="horizontal-divider"></div>
+          <div fxFlex="40">
+            <p>Or sign in to browse previously uploaded files </p>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+    
+  </div>
+</div>
