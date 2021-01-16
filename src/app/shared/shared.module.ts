@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -21,9 +22,14 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { NgxPermissionsModule } from 'ngx-permissions';
 
 import { CodeBlockComponent } from './components/code-block/code-block.component';
+import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
 import { FileContentComponent } from './components/file-content/file-content.component';
 import { FileListComponent } from './components/file-list/file-list.component';
+import { DropdownComponent } from './components/inputs/dropdown/dropdown.component';
+import { SubmitButtonComponent } from './components/inputs/submit-button/submit-button.component';
+import { TextInputComponent } from './components/inputs/text-input/text-input.component';
 import { SpaceComponent } from './components/space/space.component';
+import { DynamicFieldDirective } from './directives/dynamic-field.directive';
 import { ImageFallbackDirective } from './directives/image-fallback.directive';
 import { FormatDatePipe } from './pipes/format-date.pipe';
 
@@ -32,10 +38,15 @@ const components = [
   SpaceComponent,
   FileListComponent,
   FileContentComponent,
+  TextInputComponent,
+  DropdownComponent,
+  DynamicFormComponent,
+  SubmitButtonComponent,
 ];
 
 const directives = [
   ImageFallbackDirective,
+  DynamicFieldDirective,
 ];
 
 const pipes = [
@@ -54,6 +65,7 @@ const vendorModules = [
   MatIconModule,
   MatInputModule,
   MatMenuModule,
+  MatSelectModule,
   MatSlideToggleModule,
   MatTableModule,
   MatTabsModule,
