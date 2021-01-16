@@ -1,5 +1,15 @@
 <div class="content">
-  <ng-container *ngFor="let diagram of (diagrams$ | async); let i = index">
+  <mat-chip-list *ngIf="tags.length" #chipList multiple="true">
+    <mat-chip *ngFor="let tag of tags"
+      [value]="tag.name"
+      [selected]="tag.selected"
+      (selectionChange)=changeSelected(tag)
+      (click)="tag.selected=!tag.selected">
+      {{tag.name}}
+    </mat-chip>
+  </mat-chip-list>
+
+  <ng-container *ngFor="let diagram of diagrams; let i = index; trackBy: trackById">
     <app-diagram-card
       [id]="diagram._id"
       [name]="diagram.name"
@@ -7,6 +17,7 @@
       [image]="'/assets/images/examples/' + diagram.type + '.png'"
       [tags]="diagram.tags" 
       [order]="i % 2 == 0 ? 'row' : 'row-reverse'"
+      (tagSelected)="onTagSelected($event)"
     ></app-diagram-card>
     <app-space></app-space>
   </ng-container>

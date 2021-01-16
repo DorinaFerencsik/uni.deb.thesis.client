@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { IDiagramParam } from 'utils/interfaces/diagram';
 
@@ -14,8 +15,11 @@ export class DiagramCardComponent {
   @Input() desc: string;
   @Input() image: string;
   @Input() tags: string[];
+  @Input() filename: string;
   @Input() params: IDiagramParam[] = [];
   @Input() order: string;
+
+  @Output() tagSelected = new EventEmitter();
 
   constructor(public router: Router) { }
 

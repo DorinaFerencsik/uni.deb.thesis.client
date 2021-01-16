@@ -13,12 +13,16 @@ export class ApiDiagramService {
 
   constructor(private httpClient: CustomHttpClient) { }
 
-  public getDiagramTypeList(request: any): Observable<IBasicDiagram[]> {
-    return this.httpClient.get(this.apiUrl, 'diagram/type/list');
+  public getDiagramTypeList(request: {params?: any}): Observable<IBasicDiagram[]> {
+    return this.httpClient.post(this.apiUrl, 'diagram/type', request);
   }
 
   public getDiagramTypeById(id: string): Observable<IDiagram> {
     return this.httpClient.get(this.apiUrl, `diagram/type/${id}`);
+  }
+
+  public getTagList(): Observable<string[]> {
+    return this.httpClient.get(this.apiUrl, 'diagram/tag/list');
   }
 
 }

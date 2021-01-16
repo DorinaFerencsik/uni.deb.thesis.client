@@ -33,8 +33,7 @@ export class CreateDiagramComponent {
         first(),
         switchMap((diagramType) => {
           this.diagramType = diagramType;
-          const filename = this.diagramType.params.find(param => param.name === 'filename')?.default;
-          return filename ? this.apiFileService.readExampleFile(filename) : of(null);
+          return this.diagramType.filename ? this.apiFileService.readExampleFile(this.diagramType.filename) : of(null);
         })
       ).subscribe((fileContent) => {
         if (fileContent) {

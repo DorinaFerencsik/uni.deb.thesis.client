@@ -5,11 +5,12 @@
   <div fxFlex="70">
     <h2>{{name}}</h2>
     <mat-chip-list [selectable]="false" *ngIf="tags">
-      <mat-chip  [selectable]="false"  *ngFor="let tag of tags" color="primary">{{tag}}</mat-chip>
+      <mat-chip [selectable]="false"  *ngFor="let tag of tags" color="primary" (click)="tagSelected.emit(tag)">{{tag}}</mat-chip>
     </mat-chip-list>
     <p>{{desc}}</p>
     <div *ngIf="params && params.length; else actions">
-      <p *ngFor="let param of params">{{param.name}}: {{param.default}}</p>
+      <p>Filename: {{ filename }}</p>
+      <p *ngFor="let param of params">{{ param.label | translate }}: {{param.value}}</p>
     </div>
     <ng-template #actions>
       <button mat-button>Details</button>

@@ -6,6 +6,7 @@
     [desc]="diagramType.desc"
     [image]="'/assets/images/examples/' + diagramType.type + '.png'"
     [tags]="diagramType.tags"
+    [filename]="diagramType.filename"
     [params]="diagramType.params"
     order="row"
   ></app-diagram-card>
@@ -35,4 +36,9 @@
     </mat-tab-group>
     
   </div>
+
+  <app-parameter-card
+    [params]="diagramType.params"
+    [fileColNames]=""
+  ></app-parameter-card>
 </div>
