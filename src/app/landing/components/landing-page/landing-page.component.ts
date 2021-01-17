@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { tap } from 'rxjs/operators';
+import { ApiDiagramService } from 'src/app/diagram/services/api-diagram.service';
 
 import { ApiLandingService } from '../../services/landing.service';
 
@@ -16,10 +17,11 @@ export class LandingPageComponent implements OnInit {
 
   constructor(
     private apiService: ApiLandingService,
+    private apiDiagramService: ApiDiagramService,
     private sanitizer: DomSanitizer) { }
 
   public ngOnInit(): void {
-    this.apiService.generate()
+    this.apiService.generate({format: 'svg'})
       .pipe(
         tap(res => {
           this.imageSrc = this.sanitizer.bypassSecurityTrustUrl(res.result);
@@ -27,5 +29,5 @@ export class LandingPageComponent implements OnInit {
         })
       ).subscribe();
   }
-
 }
+

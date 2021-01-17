@@ -4,6 +4,17 @@ body {
   margin: 0;
   font-family: monospace;
 }
+a {
+  line-height: 36px;
+  cursor: pointer;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
 
 .content {
   max-width: 70%;

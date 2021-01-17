@@ -19,6 +19,7 @@ export class ApiLandingService {
     csvSeparator: '|',
     axisX: 'total_bill',
     axisY: 'tip',
+    format: 'svg',
   };
 
   constructor(private httpClient: CustomHttpClient) { }
@@ -27,7 +28,7 @@ export class ApiLandingService {
     return this.httpClient.get(this.apiUrl, 'diagram');
   }
 
-  public generate(request?: IGenerateDiagramPayload): Observable<IGenerateDiagramResponse> {
+  public generate(request?: Partial<IGenerateDiagramPayload>): Observable<IGenerateDiagramResponse> {
     let params = new HttpParams();
     _keys(this.defaulGeneratePayload).forEach(key =>
       params = params.append(key, request && request[key] ? request[key] : this.defaulGeneratePayload[key])
