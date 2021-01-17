@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { first, switchMap } from 'rxjs/operators';
+import { first, switchMap, tap } from 'rxjs/operators';
 import { ApiFileService } from 'src/app/file/services/api-file.service';
 import { IDiagram } from 'utils/interfaces/diagram';
+import { IDatasets } from 'utils/interfaces/diagram/dataset-list.interface';
 
 import { ApiDiagramService } from '../../services/api-diagram.service';
 
@@ -19,8 +20,9 @@ export class CreateDiagramComponent {
     data: any[],
     columns: string[],
   };
+  public selectedFile: {data: any, columns: any};
 
-  public exampleFileList$: Observable<any>;
+  public exampleDatasets$: Observable<IDatasets[]>;
 
   constructor(
     private route: ActivatedRoute,
@@ -43,7 +45,29 @@ export class CreateDiagramComponent {
           };
         }
       });
-    this.exampleFileList$ = this.apiFileService.listExampleFiles();
+    this.exampleDatasets$ = this.apiFileService.listExampleDatasets();
+  }
+
+  onDatasetSelected(event) {
+    this.apiFileService.readExampleDataset(event.source, event.name).pipe(
+      first(),
+      tap(fileContent =>
+        this.selectedFile = {
+          data: fileContent,
+          columns: Object.keys(fileContent[0]),
+        })
+    ).subscribe();
+  }
+
+  onFileSelected(filename: string) {
+    this.apiFileService.readExampleFile(filename).pipe(
+      first(),
+      tap(fileContent =>
+        this.selectedFile = {
+          data: fileContent,
+          columns: Object.keys(fileContent[0]),
+        })
+    ).subscribe();
   }
 
 }

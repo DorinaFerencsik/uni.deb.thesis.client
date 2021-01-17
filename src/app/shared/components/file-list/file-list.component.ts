@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-file-list',
@@ -7,9 +7,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class FileListComponent implements OnInit {
 
-  public readonly columns = ['name', 'createdAt', 'size'];
+  public readonly columns = ['name', 'createdAt', 'size', 'action'];
 
   @Input() dataSource: any[];
+
+  @Output() fileSelected = new EventEmitter();
 
   constructor() { }
 

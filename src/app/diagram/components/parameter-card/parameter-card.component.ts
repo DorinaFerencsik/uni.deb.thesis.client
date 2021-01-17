@@ -20,6 +20,8 @@ export class ParameterCardComponent implements OnInit {
     label: 'Save',
   }];
 
+  private readonly columnDropdownFields = ['axisX', 'axisY', 'axisZ'];
+
   constructor() { }
 
   ngOnInit(): void {
@@ -31,6 +33,7 @@ export class ParameterCardComponent implements OnInit {
         message: `COMNMON.ERROR.${v.type}`,
         messageParam: v.value,
       })),
+      options: param.type === 'dropdown' ? this.matDropdownOptions(param.name, param.options) : null,
     }));
   }
 
@@ -47,6 +50,13 @@ export class ParameterCardComponent implements OnInit {
       default:
         return null;
     }
+  }
+
+  private matDropdownOptions(fieldName: string, options?: string[]) {
+    if (this.columnDropdownFields.includes(fieldName)) {
+      return this.fileColNames;
+    }
+    return options;
   }
 
 }

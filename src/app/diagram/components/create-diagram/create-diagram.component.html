@@ -18,10 +18,15 @@
   <div>Inputs for params</div>
   <div>
     <mat-tab-group mat-align-tabs="center">
-      <mat-tab label="Use example file">
-        <app-file-list [dataSource]="(exampleFileList$ | async)"></app-file-list>
+      <mat-tab label="Use example dataset">
+        <ng-container *ngFor="let source of (exampleDatasets$ | async)">
+          <app-dataset-list
+            [dataSource]="source"
+            (datasetSelected)="onDatasetSelected($event)"  
+          ></app-dataset-list>
+        </ng-container>
       </mat-tab>
-      <mat-tab label="Use own file">
+      <mat-tab label="Use own dataset">
         <div class="own-file-container" fxLayout="row" fxLayoutAlign="space-evenly center">
 
           <div class="upload-area" fxFlex="40">
@@ -36,9 +41,16 @@
     </mat-tab-group>
     
   </div>
+  <ng-container *ngIf="selectedFile; else noFileSelected">
+    <app-file-content [value]="selectedFile"></app-file-content>
+    <app-parameter-card
+      [params]="diagramType.params"
+      [fileColNames]="selectedFile.columns"
+    ></app-parameter-card>
+  </ng-container>
 
-  <app-parameter-card
-    [params]="diagramType.params"
-    [fileColNames]=""
-  ></app-parameter-card>
+  <ng-template #noFileSelected>
+    <app-space></app-space>
+    <p>Please select a dataset to work with</p>
+  </ng-template>
 </div>
