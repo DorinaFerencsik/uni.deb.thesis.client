@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { IFieldConfig } from 'src/app/shared/interfaces/field-config.interface';
 import { IDiagramParam } from 'utils/interfaces/diagram';
@@ -12,15 +12,16 @@ export class ParameterCardComponent implements OnInit {
 
   @Input() params: IDiagramParam[];
   @Input() fileColNames: string[];
+  @Output() formSubmit = new EventEmitter();
 
   public fields: IFieldConfig[];
 
   public formButtons = [{
     type: 'submitButton',
-    label: 'Save',
+    label: 'Generate',
   }];
 
-  private readonly columnDropdownFields = ['axisX', 'axisY', 'axisZ'];
+  private readonly columnDropdownFields = ['axisX', 'axisY', 'axisZ', 'hue', 'style', 'size'];
 
   constructor() { }
 
@@ -38,7 +39,8 @@ export class ParameterCardComponent implements OnInit {
   }
 
   submit(value: any) {
-
+    console.log('submitted: ', value);
+    this.formSubmit.emit(value);
   }
 
   private mapValidator(validatorType: string, validatorValue?: string) {

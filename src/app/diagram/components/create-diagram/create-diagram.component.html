@@ -6,7 +6,7 @@
     [desc]="diagramType.desc"
     [image]="'/assets/images/examples/' + diagramType.type + '.png'"
     [tags]="diagramType.tags"
-    [filename]="diagramType.filename"
+    [filename]="diagramType.data.name"
     [params]="diagramType.params"
     order="row"
   ></app-diagram-card>
@@ -15,7 +15,7 @@
   <app-file-content [value]="exampleFile"></app-file-content>
   <app-space></app-space>
 
-  <div>Inputs for params</div>
+  <h2>Generate with your params</h2>
   <div>
     <mat-tab-group mat-align-tabs="center">
       <mat-tab label="Use example dataset">
@@ -42,10 +42,13 @@
     
   </div>
   <ng-container *ngIf="selectedFile; else noFileSelected">
+    <p>Selected dataset</p>
     <app-file-content [value]="selectedFile"></app-file-content>
+    <app-space></app-space>
     <app-parameter-card
       [params]="diagramType.params"
       [fileColNames]="selectedFile.columns"
+      (formSubmit)="onSubmit($event)"
     ></app-parameter-card>
   </ng-container>
 
@@ -53,4 +56,14 @@
     <app-space></app-space>
     <p>Please select a dataset to work with</p>
   </ng-template>
+
+  <div *ngIf="source && imageSrc" class="example" fxLayout="row" fxLayoutGap="20px">
+    <app-code-block
+      fxFlex="40"
+      [code]="source"
+    ></app-code-block>
+    <div fxFlex="60">
+      <img *ngIf="imageSrc" [src]="imageSrc" class="diagram"/>
+    </div>
+  </div>
 </div>

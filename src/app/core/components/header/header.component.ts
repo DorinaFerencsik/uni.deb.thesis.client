@@ -17,12 +17,12 @@ export class HeaderComponent {
   public readonly menuItems = [
     {
       label: 'Diagrams',
-      url: '',
-      roles: [Roles.Basic],
+      url: 'diagram',
+      // roles: [Roles.Basic],
     },
     {
       label: 'My files',
-      url: '/files',
+      url: 'files',
       roles: [Roles.Basic],
     },
     {
