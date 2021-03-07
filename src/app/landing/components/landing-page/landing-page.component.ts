@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
+import { ApiDiagramService } from 'src/app/diagram/services/api-diagram.service';
+import { DiagramTypeEnum } from 'utils/enums/diagram/diagram-types.enum';
 
 import { ApiLandingService } from '../../services/landing.service';
 
@@ -16,17 +17,18 @@ export class LandingPageComponent implements OnInit {
   public source: string;
 
   constructor(
-    private apiSercice: ApiLandingService,
+    private apiService: ApiLandingService,
+    private apiDiagramService: ApiDiagramService,
     private sanitizer: DomSanitizer) { }
 
   public ngOnInit(): void {
-    this.apiSercice.getBasic()
+    this.apiService.generate({typeId: DiagramTypeEnum.example, format: 'svg'})
       .pipe(
         tap(res => {
-          this.imageSrc = this.sanitizer.bypassSecurityTrustUrl(res.picture);
+          this.imageSrc = this.sanitizer.bypassSecurityTrustUrl(res.result);
           this.source = res.source;
         })
       ).subscribe();
   }
-
 }
+

@@ -1,0 +1,14 @@
+<table *ngIf="value?.data; else noContent" mat-table [dataSource]="value.data" class="mat-elevation-z8">
+
+  <ng-container *ngFor="let col of value.columns; let colIndex = index" matColumnDef="{{col}}">
+    <th mat-header-cell *matHeaderCellDef>{{ col | titlecase }}</th>
+    <td mat-cell *matCellDef="let element">{{ element[col] }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="value.columns"></tr>
+  <tr mat-row *matRowDef="let row; columns: value.columns"></tr>
+</table>
+
+<ng-template #noContent>
+  No content
+</ng-template>

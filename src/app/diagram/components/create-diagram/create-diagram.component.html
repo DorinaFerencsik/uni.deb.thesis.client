@@ -1,0 +1,69 @@
+<div class="content" *ngIf="diagramType">
+  
+  <app-diagram-card
+    [id]="diagramType._id"
+    [name]="diagramType.name"
+    [desc]="diagramType.desc"
+    [image]="'/assets/images/examples/' + diagramType.type + '.png'"
+    [tags]="diagramType.tags"
+    [filename]="diagramType.data.name"
+    [params]="diagramType.params"
+    order="row"
+  ></app-diagram-card>
+  <app-space></app-space>
+
+  <app-file-content [value]="exampleFile"></app-file-content>
+  <app-space></app-space>
+
+  <h2>Generate with your params</h2>
+  <div>
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="Use example dataset">
+        <ng-container *ngFor="let source of (exampleDatasets$ | async)">
+          <app-dataset-list
+            [dataSource]="source"
+            (datasetSelected)="onDatasetSelected($event)"  
+          ></app-dataset-list>
+        </ng-container>
+      </mat-tab>
+      <mat-tab label="Use own dataset">
+        <div class="own-file-container" fxLayout="row" fxLayoutAlign="space-evenly center">
+
+          <div class="upload-area" fxFlex="40">
+            <p>Upload file</p>
+          </div>
+          <div class="horizontal-divider"></div>
+          <div fxFlex="40">
+            <p>Or sign in to browse previously uploaded files </p>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+    
+  </div>
+  <ng-container *ngIf="selectedFile; else noFileSelected">
+    <p>Selected dataset</p>
+    <app-file-content [value]="selectedFile"></app-file-content>
+    <app-space></app-space>
+    <app-parameter-card
+      [params]="diagramType.params"
+      [fileColNames]="selectedFile.columns"
+      (formSubmit)="onSubmit($event)"
+    ></app-parameter-card>
+  </ng-container>
+
+  <ng-template #noFileSelected>
+    <app-space></app-space>
+    <p>Please select a dataset to work with</p>
+  </ng-template>
+
+  <div *ngIf="source && imageSrc" class="example" fxLayout="row" fxLayoutGap="20px">
+    <app-code-block
+      fxFlex="40"
+      [code]="source"
+    ></app-code-block>
+    <div fxFlex="60">
+      <img *ngIf="imageSrc" [src]="imageSrc" class="diagram"/>
+    </div>
+  </div>
+</div>

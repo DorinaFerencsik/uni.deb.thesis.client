@@ -2,12 +2,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Base64 } from 'js-base64';
+import { NgxPermissionsService } from 'ngx-permissions';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { ITokenPayload } from 'src/utils/payloads/auth';
-import { IBasicUser } from 'src/utils/interfaces/user';
-import { ILoginPayload } from 'src/utils/payloads/auth';
 import { Errors } from 'src/utils/enums/common';
+import { IBasicUser } from 'src/utils/interfaces/user';
+import { ILoginPayload, ITokenPayload } from 'src/utils/payloads/auth';
 
 import { LoginDialogComponent } from '../components/login-dialog/login-dialog.component';
 
@@ -25,6 +25,7 @@ export class AuthService {
 
   constructor(
     private apiService: ApiAuthService,
+    private permissionsService: NgxPermissionsService,
     private dialog: MatDialog
   ) {
     this.restoreSession();
@@ -42,6 +43,7 @@ export class AuthService {
 
   public logout() {
     this.user$.next(null);
+    this.permissionsService.flushPermissions();
     this.deleteTokens();
   }
 
@@ -117,6 +119,7 @@ export class AuthService {
       roles: this.tokenPayload.roles,
       email: this.tokenPayload.email,
     });
+    this.permissionsService.loadPermissions(this.tokenPayload.roles);
   }
 
   private updateTokens(accessToken: string, refreshToken?: string) {

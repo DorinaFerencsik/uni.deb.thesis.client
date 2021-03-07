@@ -21,5 +21,25 @@
         "PASSWORD": "Password"
       }
     }
+  },
+  "DIAGRAM": {
+    "SEPARATOR": {
+      "LABEL": "Separator"
+    },
+    "AXISX": {
+      "LABEL": "Axis X"
+    },
+    "AXISY": {
+      "LABEL": "Axis Y"
+    },
+    "HUE": {
+      "LABEL": "Hue"
+    },
+    "STYLE": {
+      "LABEL": "Style"
+    },
+    "SIZE": {
+      "LABEL": "Size"
+    }
   }
 }
