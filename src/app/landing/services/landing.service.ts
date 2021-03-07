@@ -14,11 +14,15 @@ export class ApiLandingService {
   private apiUrl = 'diagramApi';
 
   private defaulGeneratePayload: IGenerateDiagramPayload = {
-    type: DiagramTypeEnum.example,
-    filename: 'file name.csv',
-    csvSeparator: '|',
-    axisX: 'total_bill',
-    axisY: 'tip',
+    typeId: DiagramTypeEnum.example,
+    data: {source: 'example', name: 'file name.csv'},
+    params: [{
+      csvSeparator: '|',
+    }, {
+      axisX: 'total_bill',
+    }, {
+      axisY: 'tip',
+    }],
     format: 'svg',
   };
 
@@ -33,7 +37,8 @@ export class ApiLandingService {
     _keys(this.defaulGeneratePayload).forEach(key =>
       params = params.append(key, request && request[key] ? request[key] : this.defaulGeneratePayload[key])
     );
-    return this.httpClient.get(this.apiUrl, 'diagram/generate', {params});
+    // return this.httpClient.get(this.apiUrl, 'diagram/generate', {params});
+    return this.httpClient.post(this.apiUrl, 'diagram/generate', request);
   }
 
 }

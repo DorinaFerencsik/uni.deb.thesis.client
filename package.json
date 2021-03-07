@@ -38,6 +38,8 @@
     "@angular/router": "~9.1.11",
     "@commitlint/cli": "~11.0.0",
     "@commitlint/config-angular": "~11.0.0",
+    "@nestjs/common": "^7.6.13",
+    "@nestjs/swagger": "^4.7.15",
     "@ngx-translate/core": "~12.1.2",
     "@ngx-translate/http-loader": "~5.0.0",
     "husky": "~4.3.0",
@@ -48,6 +50,7 @@
     "ngx-permissions": "^8.1.1",
     "panzoom": "^9.4.1",
     "rxjs": "~6.5.4",
+    "swagger-ui-express": "^4.1.6",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

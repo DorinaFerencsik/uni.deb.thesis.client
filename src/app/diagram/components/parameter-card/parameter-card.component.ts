@@ -21,7 +21,7 @@ export class ParameterCardComponent implements OnInit {
     label: 'Generate',
   }];
 
-  private readonly columnDropdownFields = ['axisX', 'axisY', 'axisZ', 'hue', 'style', 'size'];
+  private readonly columnDropdownFields = ['x', 'y', 'z', 'hue', 'style', 'size'];
 
   constructor() { }
 
