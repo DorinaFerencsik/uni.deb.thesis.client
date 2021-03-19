@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { first, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { ApiFileService } from 'src/app/file/services/api-file.service';
+import { ApiFileService } from 'src/app/diagram/services/api-file.service';
 import { Roles } from 'utils/enums/user';
 import { IDiagramType } from 'utils/interfaces/diagram';
 import { IDataSource } from 'utils/interfaces/diagram/data-source.interface';

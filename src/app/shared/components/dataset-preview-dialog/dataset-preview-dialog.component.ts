@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { ApiFileService } from 'src/app/file/services/api-file.service';
+import { ApiFileService } from 'src/app/diagram/services/api-file.service';
 import { IPagination } from 'utils/interfaces/common/pagination.interface';
 
 import { FileOwner } from '../../enums/file-owner.enum';

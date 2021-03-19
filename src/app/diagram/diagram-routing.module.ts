@@ -4,20 +4,28 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateDiagramComponent } from './components/create-diagram/create-diagram.component';
 import { DiagramListComponent } from './components/diagram-list/diagram-list.component';
 import { ExampleListComponent } from './components/example-list/example-list.component';
+import { UserFilesComponent } from './components/user-files/user-files.component';
 
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'diagram',
+    pathMatch: 'full',
     component: ExampleListComponent,
+    children: [
+      {
+        path: 'create',
+        component: CreateDiagramComponent,
+      },
+      {
+        path: 'saved',
+        component: DiagramListComponent,
+      },
+    ],
   },
   {
-    path: 'create',
-    component: CreateDiagramComponent,
-  },
-  {
-    path: 'saved',
-    component: DiagramListComponent,
+    path: 'file',
+    component: UserFilesComponent,
   },
 ];
 

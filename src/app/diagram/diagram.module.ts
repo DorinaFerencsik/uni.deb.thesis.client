@@ -7,6 +7,8 @@ import { DiagramCardComponent } from './components/diagram-card/diagram-card.com
 import { DiagramListComponent } from './components/diagram-list/diagram-list.component';
 import { ExampleListComponent } from './components/example-list/example-list.component';
 import { ParameterCardComponent } from './components/parameter-card/parameter-card.component';
+import { UploadFileComponent } from './components/upload-file/upload-file.component';
+import { UserFilesComponent } from './components/user-files/user-files.component';
 import { DiagramRoutingModule } from './diagram-routing.module';
 
 @NgModule({
@@ -16,6 +18,8 @@ import { DiagramRoutingModule } from './diagram-routing.module';
     DiagramListComponent,
     DiagramCardComponent,
     ParameterCardComponent,
+    UploadFileComponent,
+    UserFilesComponent,
   ],
   imports: [
     SharedModule,
