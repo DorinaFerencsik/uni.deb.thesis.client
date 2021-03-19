@@ -41,5 +41,8 @@
     "SIZE": {
       "LABEL": "Size"
     }
+  },
+  "FILE": {
+    "TITLE": "My files"
   }
 }

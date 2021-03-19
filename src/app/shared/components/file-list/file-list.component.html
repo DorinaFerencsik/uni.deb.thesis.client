@@ -17,6 +17,10 @@
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef> </th>
     <td mat-cell *matCellDef="let element">
+      <button mat-flat-button (click)="openPreview(element.name)">
+        Preview
+        <mat-icon>remove_red_eye</mat-icon>
+      </button>
       <button mat-flat-button (click)="fileSelected.emit(element.name)">
         Use this
         <mat-icon>arrow_right_alt</mat-icon>

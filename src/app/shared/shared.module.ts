@@ -15,17 +15,20 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTreeModule } from '@angular/material/tree';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgxFileDropModule } from 'ngx-file-drop';
 import { NgxFilesizeModule } from 'ngx-filesize';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { NgxPermissionsModule } from 'ngx-permissions';
 
 import { CodeBlockComponent } from './components/code-block/code-block.component';
 import { DatasetListComponent } from './components/dataset-list/dataset-list.component';
+import { DatasetPreviewDialogComponent } from './components/dataset-preview-dialog/dataset-preview-dialog.component';
 import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
 import { FileContentComponent } from './components/file-content/file-content.component';
 import { FileListComponent } from './components/file-list/file-list.component';
@@ -47,6 +50,7 @@ const components = [
   DynamicFormComponent,
   SubmitButtonComponent,
   DatasetListComponent,
+  DatasetPreviewDialogComponent,
 ];
 
 const directives = [
@@ -74,11 +78,13 @@ const vendorModules = [
   MatPaginatorModule,
   MatSelectModule,
   MatSlideToggleModule,
+  MatSnackBarModule,
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
   MatTreeModule,
   NgxFilesizeModule,
+  NgxFileDropModule,
   ReactiveFormsModule,
   TranslateModule,
 ];
