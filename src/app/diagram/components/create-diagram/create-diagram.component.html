@@ -8,7 +8,7 @@
     [tags]="diagramType.tags"
     [filename]="diagramType.data.name"
     [params]="diagramType.params"
-    order="row"
+    order="row-reverse"
   ></app-diagram-card>
   <app-space></app-space>
 
@@ -28,14 +28,10 @@
       </mat-tab>
       <mat-tab label="Use own dataset">
         <div class="own-file-container" fxLayout="row" fxLayoutAlign="space-evenly center">
-
-          <div class="upload-area" fxFlex="40">
-            <p>Upload file</p>
-          </div>
-          <div class="horizontal-divider"></div>
-          <div fxFlex="40">
-            <p>Or sign in to browse previously uploaded files </p>
-          </div>
+            <p *ngxPermissionsOnly="[roles.Guest]"><a (click)="onRegister()">Sign up</a> or <a (click)="onLogin()">sign in</a> to work with your dataset</p>
+            <div *ngxPermissionsOnly="[roles.Basic]">
+              Logged in content here 
+            </div>  
         </div>
       </mat-tab>
     </mat-tab-group>

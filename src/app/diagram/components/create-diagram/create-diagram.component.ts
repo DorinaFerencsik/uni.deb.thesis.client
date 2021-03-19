@@ -3,7 +3,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { first, switchMap, tap } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { ApiFileService } from 'src/app/file/services/api-file.service';
+import { Roles } from 'utils/enums/user';
 import { IDiagramType } from 'utils/interfaces/diagram';
 import { IDataSource } from 'utils/interfaces/diagram/data-source.interface';
 import { IDatasets } from 'utils/interfaces/diagram/dataset-list.interface';
@@ -17,6 +19,7 @@ import { ApiDiagramService } from '../../services/api-diagram.service';
 })
 export class CreateDiagramComponent {
 
+  public roles = Roles;
   public diagramType: IDiagramType;
   public exampleFile: {
     data: any[],
@@ -34,6 +37,7 @@ export class CreateDiagramComponent {
 
   constructor(
     private route: ActivatedRoute,
+    private authService: AuthService,
     private apiService: ApiDiagramService,
     private apiFileService: ApiFileService,
     private sanitizer: DomSanitizer
@@ -111,4 +115,11 @@ export class CreateDiagramComponent {
     });
   }
 
+  public onLogin() {
+    this.authService.login().subscribe();
+  }
+
+  public onRegister() {
+    this.authService.register();
+  }
 }

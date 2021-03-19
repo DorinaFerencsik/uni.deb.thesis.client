@@ -4,10 +4,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { Base64 } from 'js-base64';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { Errors } from 'src/utils/enums/common';
 import { IBasicUser } from 'src/utils/interfaces/user';
 import { ILoginPayload, ITokenPayload } from 'src/utils/payloads/auth';
+import { Roles } from 'utils/enums/user';
 
 import { LoginDialogComponent } from '../components/login-dialog/login-dialog.component';
 
@@ -44,7 +45,13 @@ export class AuthService {
   public logout() {
     this.user$.next(null);
     this.permissionsService.flushPermissions();
+    this.permissionsService.loadPermissions([Roles.Guest]);
+    console.log('Current permissions: ', this.permissionsService.getPermissions());
     this.deleteTokens();
+  }
+
+  public register() {
+    console.log('Should register');
   }
 
   public refreshAccessToken() {
@@ -52,18 +59,21 @@ export class AuthService {
     if (!refreshToken) {
       return of(null);
     }
+    console.log('Trying to refresh');
     return this.apiService.refreshAccessToken(refreshToken)
       .pipe(
         // FIXME catch error
         tap((response) => {
-          if (response instanceof HttpErrorResponse) {
-            this.logout();
-            if (response.error.message === Errors.TokenExpired) {
-              console.error('refresh token expired!');
-            }
-          } else {
-            return this.loadUser().subscribe();
+          console.log('refresh response: ', response);
+          return this.loadUser().subscribe();
+        }),
+        catchError(err => {
+          console.log('err: ', err);
+          this.logout();
+          if (err.error.message === Errors.TokenExpired) {
+            console.error('refresh token expired!');
           }
+          return of(null);
         })
       );
   }

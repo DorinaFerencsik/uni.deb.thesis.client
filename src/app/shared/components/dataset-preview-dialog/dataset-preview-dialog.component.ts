@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { LoginDialogComponent } from 'src/app/auth/components/login-dialog/login-dialog.component';
 import { ApiFileService } from 'src/app/file/services/api-file.service';
 import { IPagination } from 'utils/interfaces/common/pagination.interface';
 
@@ -20,7 +19,7 @@ export class DatasetPreviewDialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { fileOwner: FileOwner, name: string, source?: string },
-    private dialogRef: MatDialogRef<LoginDialogComponent>,
+    private dialogRef: MatDialogRef<DatasetPreviewDialogComponent>,
     private fileService: ApiFileService) {
       this.readData();
     }
