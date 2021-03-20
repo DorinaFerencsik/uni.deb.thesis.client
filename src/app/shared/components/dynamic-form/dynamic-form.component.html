@@ -10,6 +10,35 @@
       ></ng-container>
     </div>
   </div>
+  <ng-container *ngIf="subGroupFields.length">
+
+    <div *ngFor="let group of subGroups" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+      <div *ngFor="let field of subGroupFields " fxFlex="calc(100%/{{subGroupFields.length+1}}-20px)">
+        <ng-container
+          appDynamicField
+          [field]="field"
+          [group]="group.group"
+        ></ng-container>
+      </div>
+      <div>
+        <button mat-icon-button type="button" (click)="addSubGroup()">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button type="button" (click)="removeSubGroup(group.name)">
+          <mat-icon>remove</mat-icon>
+        </button>
+  
+      </div>
+    </div>
+
+    <div *ngIf="!subGroups.length">
+      Subgroup
+      <button mat-icon-button type="button" (click)="addSubGroup()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+     
+  </ng-container>
 
   <ng-contaner
     *ngFor="let button of buttons"

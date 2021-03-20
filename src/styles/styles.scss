@@ -52,3 +52,10 @@ th, td, td {
   padding-left: 20px !important;
   padding-right: 20px !important;
 }
+
+mat-form-field.required-field {
+  .mat-form-field-label::after {
+    content: "*";
+    margin-left: 6px;
+  }
+}

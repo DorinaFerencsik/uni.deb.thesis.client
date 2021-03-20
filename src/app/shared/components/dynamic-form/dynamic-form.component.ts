@@ -12,18 +12,25 @@ export class DynamicFormComponent implements OnInit {
 
   @Input() fields: IFieldConfig[] = [];
   @Input() buttons: IFieldConfig[] = [];
+  @Input() subGroupFields: IFieldConfig[] = [];
   @Output() formSubmit = new EventEmitter<any>();
 
+  public subGroups: {name: string, group: FormGroup}[] = [];
   public form: FormGroup;
 
   get value() {
     return this.form.value;
   }
 
+  private subGroupCounter = 0;
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.form = this.createControl();
+    if (this.subGroupFields.length) {
+      this.addSubGroup();
+    }
   }
 
   public onSubmit(event: Event) {
@@ -34,6 +41,26 @@ export class DynamicFormComponent implements OnInit {
     } else {
       this.validateAllFormFields(this.form);
     }
+  }
+
+  addSubGroup() {
+    const group = this.fb.group({});
+    this.subGroupFields.forEach(field => {
+      const control = this.fb.control(
+        field.value,
+        this.bindValidations(field.validations || [])
+      );
+      group.addControl(field.name, control);
+    });
+
+    this.form.addControl(`subGroup-${this.subGroupCounter}`, group);
+    this.subGroups.push({name: `subGroup-${this.subGroupCounter}`, group});
+    this.subGroupCounter++;
+  }
+
+  removeSubGroup(name: string) {
+    this.form.removeControl(name);
+    this.subGroups = this.subGroups.filter(item => item.name !== name);
   }
 
   private createControl() {
@@ -63,6 +90,14 @@ export class DynamicFormComponent implements OnInit {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
       control.markAsTouched({ onlySelf: true });
+    });
+
+    // FIXME: mark subgroups as touched is not working
+    this.subGroups.forEach(item => {
+      Object.keys(item.group.controls).forEach(field => {
+        const control = formGroup.get(field);
+        control.markAsTouched({ onlySelf: true });
+      });
     });
   }
 
