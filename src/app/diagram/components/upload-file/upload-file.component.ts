@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FileSystemDirectoryEntry, FileSystemFileEntry, NgxFileDropEntry } from 'ngx-file-drop';
 import { switchMap } from 'rxjs/operators';
 
@@ -12,7 +12,9 @@ import { FileService } from '../../services/file.service';
 })
 export class UploadFileComponent implements OnInit {
 
-  public files: NgxFileDropEntry[] = [];
+  public file: NgxFileDropEntry = null;
+
+  @Output() fileUploaded = new EventEmitter();
 
   constructor(
     private service: FileService,
@@ -20,45 +22,33 @@ export class UploadFileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.apiService.readFile('testFile.csv').subscribe();
   }
 
-  public uploadFile(event) {
-    this.service.readFile(event, {filename: 'testFile.csv'})
-      .pipe(
-        switchMap((payload) => {
-          return this.apiService.uploadFile(payload);
-        })
-      ).subscribe();
-  }
+  public uploadFile() {
+    if (this.file.fileEntry.isFile) {
+      const fileEntry = this.file.fileEntry as FileSystemFileEntry;
+      fileEntry.file((file: File) => {
 
-  public uploadFiles() {
+        // Access the real file
+        console.log(this.file.relativePath, file);
+
+        this.apiService.uploadFileAsFormData(file, this.file.relativePath)
+        .subscribe(data => {
+          console.log('response:', data);
+          this.fileUploaded.emit();
+          this.file = null;
+        });
+
+      });
+    } else {
+      // It was a directory (empty directories are added, otherwise only files)
+      const fileEntry = this.file.fileEntry as FileSystemDirectoryEntry;
+      console.log(this.file.relativePath, fileEntry);
+    }
   }
 
   public dropped(files: NgxFileDropEntry[]) {
-    this.files = files;
-    for (const droppedFile of files) {
-
-      // Check if it's a file
-      if (droppedFile.fileEntry.isFile) {
-        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-        fileEntry.file((file: File) => {
-
-          // Access the real file
-          console.log(droppedFile.relativePath, file);
-
-          this.apiService.uploadFileAsFormData(file, droppedFile.relativePath)
-          .subscribe(data => {
-            console.log('response:', data);
-          });
-
-        });
-      } else {
-        // It was a directory (empty directories are added, otherwise only files)
-        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-        console.log(droppedFile.relativePath, fileEntry);
-      }
-    }
+    this.file = files[0];
   }
 
   public fileOver(event){

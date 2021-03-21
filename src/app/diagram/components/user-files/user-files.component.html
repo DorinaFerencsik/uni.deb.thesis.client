@@ -2,14 +2,17 @@
   <h1>{{ "FILE.TITLE" | translate }}</h1>
   <div fxLayout="row" fxLayout.lt-lg="column-reverse" fxLayoutGap="15px" fxLayoutGap.lt-lg="30px">
 
-    <div fxFlex.gt-md="60">
+    <div fxFlex.gt-md="70">
 
-      <app-file-list *ngIf="(files$ | async) as files"
-      [dataSource]="files"
-      owner="user"
+      <app-file-list
+        *ngIf="(files$ | async) as files"
+        [dataSource]="files"
+        owner="user"
      ></app-file-list>
     </div>
 
-   <app-upload-file fxFlex.gt-md="60"></app-upload-file>
+   <app-upload-file
+    fxFlex.gt-md="30" 
+    (fileUploaded)="refreshFileList()"></app-upload-file>
   </div>
 </div>

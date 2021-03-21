@@ -18,7 +18,10 @@ export class UserFilesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.files$ = this.apiService.listUserFiles().pipe(tap(res => console.log(res)));
+    this.refreshFileList();
   }
 
+  public refreshFileList() {
+    this.files$ = this.apiService.listUserFiles().pipe(tap(res => console.log(res)));
+  }
 }

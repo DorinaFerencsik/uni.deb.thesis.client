@@ -4,7 +4,8 @@
       "CLOSE": "Close",
       "CANCEL": "Cancel",
       "CREATE": "Create",
-      "DARK_MODE": "Dark mode"
+      "DARK_MODE": "Dark mode",
+      "UPLOAD": "Upload"
     },
     "ERROR": {
       "REQUIRED": "Required field",
