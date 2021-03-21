@@ -1,10 +1,10 @@
 <div class="content" *ngIf="diagramType">
-  
+
   <app-diagram-card
     [id]="diagramType._id"
     [name]="diagramType.name"
     [desc]="diagramType.desc"
-    [image]="'/assets/images/examples/' + diagramType.type + '.png'"
+    [image]="imgUrl"
     [tags]="diagramType.tags"
     [filename]="diagramType.data.name"
     [params]="diagramType.params"
