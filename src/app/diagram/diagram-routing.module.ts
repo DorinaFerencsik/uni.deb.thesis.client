@@ -41,7 +41,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'file',
+    path: 'files',
     component: UserFilesComponent,
   },
 ];
