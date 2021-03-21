@@ -30,4 +30,8 @@ export class ApiDiagramService {
     return this.httpClient.post(this.apiUrl, 'diagram/generate', request);
   }
 
+  public createDiagramType(request: Partial<IDiagramType>): Observable<any> {
+    return this.httpClient.post(this.apiUrl, 'diagram', request);
+  }
+
 }

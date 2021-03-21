@@ -24,7 +24,7 @@ export class DiagramCardComponent {
   constructor(public router: Router) { }
 
   public createFromType() {
-    this.router.navigate(['/diagram/create'], { queryParams: { type: this.id } });
+    this.router.navigate(['/app/diagram/create'], { queryParams: { type: this.id } });
   }
 
 }
