@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { Base64 } from 'js-base64';
+import { keys as _keys } from 'lodash';
 import { Observable, of } from 'rxjs';
 import { first, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { ApiFileService } from 'src/app/diagram/services/api-file.service';
+import { NameDialogComponent } from 'src/app/shared/components/name-dialog/name-dialog.component';
 import { environment } from 'src/environments/environment';
 import { Roles } from 'utils/enums/user';
 import { IDiagramType } from 'utils/interfaces/diagram';
 import { IDataSource } from 'utils/interfaces/diagram/data-source.interface';
 import { IDatasets } from 'utils/interfaces/diagram/dataset-list.interface';
+import { IGenerateDiagramPayload } from 'utils/payloads/diagram';
 
 import { ApiDiagramService } from '../../services/api-diagram.service';
 
@@ -37,12 +42,15 @@ export class CreateDiagramComponent {
   private readonly typeId: string;
   private selectedDataSource: IDataSource;
 
+  private diagramParams: IGenerateDiagramPayload = null;
+
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
     private apiService: ApiDiagramService,
     private apiFileService: ApiFileService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private dialog: MatDialog
   ) {
     this.typeId = this.route.snapshot.queryParams.type;
     this.imgUrl = `${environment.diagramApi}file/img/${this.typeId}`;
@@ -112,9 +120,27 @@ export class CreateDiagramComponent {
       params: event,
       format: 'png',
     }).subscribe(res => {
-      console.log('response', res);
       this.imageSrc = this.sanitizer.bypassSecurityTrustUrl(res.result);
       this.source = res.source;
+      this.diagramParams = res.settings;
+    });
+  }
+
+  public saveDiagram() {
+    this.dialog.open(NameDialogComponent, {
+      data: {title: 'What should be the name of this diagram?', label: 'Diagram name'},
+    }).afterClosed().subscribe(data => {
+      if (data) {
+        this.apiService.createUserDiagram({
+          name: data.name,
+          diagramTypeId: this.typeId,
+          data: this.diagramParams.data,
+          params: _keys(this.diagramParams.params).map(k => ({name: k, value: this.diagramParams.params[k]})),
+          sourceCode: Base64.btoa(this.source),
+        }).subscribe(res => {
+          console.log('Diagram saved by id', res);
+        });
+      }
     });
   }
 

@@ -2,6 +2,7 @@
   "COMMON": {
     "BUTTON": {
       "CLOSE": "Close",
+      "SUBMIT": "Ok",
       "CANCEL": "Cancel",
       "CREATE": "Create",
       "DARK_MODE": "Dark mode",

@@ -46,6 +46,7 @@
       [fileColNames]="selectedFile.columns"
       (formSubmit)="onSubmit($event)"
     ></app-parameter-card>
+    <button mat-button (click)="saveDiagram()">Save</button>
   </ng-container>
 
   <ng-template #noFileSelected>

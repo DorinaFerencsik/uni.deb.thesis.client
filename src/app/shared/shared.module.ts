@@ -35,6 +35,7 @@ import { FileListComponent } from './components/file-list/file-list.component';
 import { DropdownComponent } from './components/inputs/dropdown/dropdown.component';
 import { SubmitButtonComponent } from './components/inputs/submit-button/submit-button.component';
 import { TextInputComponent } from './components/inputs/text-input/text-input.component';
+import { NameDialogComponent } from './components/name-dialog/name-dialog.component';
 import { SpaceComponent } from './components/space/space.component';
 import { DynamicFieldDirective } from './directives/dynamic-field.directive';
 import { ImageFallbackDirective } from './directives/image-fallback.directive';
@@ -51,6 +52,7 @@ const components = [
   SubmitButtonComponent,
   DatasetListComponent,
   DatasetPreviewDialogComponent,
+  NameDialogComponent,
 ];
 
 const directives = [
