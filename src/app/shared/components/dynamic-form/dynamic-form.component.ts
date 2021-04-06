@@ -33,6 +33,10 @@ export class DynamicFormComponent implements OnInit {
     }
   }
 
+  public resetForm() {
+    this.form.reset();
+  }
+
   public onSubmit(event: Event) {
     event.preventDefault();
     event.stopPropagation();

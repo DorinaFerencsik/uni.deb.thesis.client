@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { DynamicFormComponent } from 'src/app/shared/components/dynamic-form/dynamic-form.component';
 import { IFieldConfig } from 'src/app/shared/interfaces/field-config.interface';
 import { DATA_COLUMN_PARAM } from 'utils/constants/diagrams';
 import { IDiagramParam } from 'utils/interfaces/diagram';
@@ -10,6 +11,8 @@ import { IDiagramParam } from 'utils/interfaces/diagram';
   styleUrls: ['./parameter-card.component.scss'],
 })
 export class ParameterCardComponent implements OnInit, OnChanges {
+
+  @ViewChild('myForm', {static: false}) myForm: DynamicFormComponent;
 
   @Input() params: IDiagramParam[];
   @Input() fileColNames: string[];
@@ -39,6 +42,10 @@ export class ParameterCardComponent implements OnInit, OnChanges {
       })),
       options: param.type === 'dropdown' ? this.matDropdownOptions(param.name, param.options) : null,
     }));
+    console.log('parameter card onchange');
+    if (this.myForm) {
+      this.myForm.resetForm();
+    }
   }
 
   submit(value: any) {
