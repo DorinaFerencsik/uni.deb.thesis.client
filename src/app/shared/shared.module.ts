@@ -32,6 +32,7 @@ import { DatasetPreviewDialogComponent } from './components/dataset-preview-dial
 import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
 import { FileContentComponent } from './components/file-content/file-content.component';
 import { FileListComponent } from './components/file-list/file-list.component';
+import { ArrayInputComponent } from './components/inputs/array-input/array-input.component';
 import { DropdownComponent } from './components/inputs/dropdown/dropdown.component';
 import { SubmitButtonComponent } from './components/inputs/submit-button/submit-button.component';
 import { TextInputComponent } from './components/inputs/text-input/text-input.component';
@@ -53,6 +54,7 @@ const components = [
   DatasetListComponent,
   DatasetPreviewDialogComponent,
   NameDialogComponent,
+  ArrayInputComponent,
 ];
 
 const directives = [

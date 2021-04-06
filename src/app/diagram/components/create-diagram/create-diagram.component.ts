@@ -35,6 +35,7 @@ export class CreateDiagramComponent {
   public selectedFile: {data: any, columns: any};
 
   public exampleDatasets$: Observable<IDatasets[]>;
+  public exampleFiles$: Observable<IDatasets>;
 
   public imageSrc;
   public source: string;
@@ -72,6 +73,7 @@ export class CreateDiagramComponent {
         }
       });
     this.exampleDatasets$ = this.apiFileService.listExampleDatasets();
+    this.exampleFiles$ = this.apiFileService.listExampleFiles();
   }
 
   onDatasetSelected(event) {
@@ -82,6 +84,25 @@ export class CreateDiagramComponent {
     this.apiFileService.readExampleDataset(event.source, event.name).pipe(
       first(),
       tap(fileContent => {
+        console.log('setting selectedFile to null');
+        this.selectedFile = null;
+        this.selectedFile = {
+          data: fileContent,
+          columns: Object.keys(fileContent[0]),
+        };
+      })
+    ).subscribe();
+  }
+
+  onExampleFileSelected(event) {
+    this.selectedDataSource = {
+      source: event.source,
+      name: event.name,
+    };
+    this.apiFileService.readExampleFile(event.name).pipe(
+      first(),
+      tap(fileContent => {
+        console.log('setting selectedFile to null');
         this.selectedFile = null;
         this.selectedFile = {
           data: fileContent,

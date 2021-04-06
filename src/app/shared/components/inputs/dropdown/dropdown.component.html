@@ -1,6 +1,6 @@
 <mat-form-field [formGroup]="group" fxFlex="100" [class.required-field]="isRequired">
   <mat-select [placeholder]="field.label | translate" [formControlName]="field.name">
-    <mat-option *ngFor="let item of field.options" [value]="item">
+    <mat-option *ngFor="let item of options" [value]="item">
       {{item}}
     </mat-option>
   </mat-select>

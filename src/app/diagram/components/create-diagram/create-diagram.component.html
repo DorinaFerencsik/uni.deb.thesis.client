@@ -25,6 +25,12 @@
             (datasetSelected)="onDatasetSelected($event)"  
           ></app-dataset-list>
         </ng-container>
+        <ng-container *ngIf="(exampleFiles$ | async) as exampleFiles">
+          <app-dataset-list
+            [dataSource]="exampleFiles"
+            (datasetSelected)="onExampleFileSelected($event)"  
+        ></app-dataset-list>
+        </ng-container>
       </mat-tab>
       <mat-tab label="Use own dataset">
         <div class="own-file-container" fxLayout="row" fxLayoutAlign="space-evenly center">

@@ -27,7 +27,7 @@ export class DatasetListComponent implements OnInit {
   constructor(private dialog: MatDialog) {
     this.paginationParams = {
       rows: 5,
-      page: 1,
+      page: 0,
     };
   }
 
