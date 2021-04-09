@@ -32,6 +32,10 @@ export class AuthService {
     this.restoreSession();
   }
 
+  public isLoggedIn() {
+    return !!this.user$.getValue();
+  }
+
 
   // TODO handle errors
   public login(): Observable<any> {
@@ -129,6 +133,7 @@ export class AuthService {
       roles: this.tokenPayload.roles,
       email: this.tokenPayload.email,
     });
+    console.log(`Loading permissions:`, this.tokenPayload.roles);
     this.permissionsService.loadPermissions(this.tokenPayload.roles);
   }
 

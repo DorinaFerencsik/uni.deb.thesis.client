@@ -36,6 +36,7 @@ export class CreateDiagramComponent {
 
   public exampleDatasets$: Observable<IDatasets[]>;
   public exampleFiles$: Observable<IDatasets>;
+  public userFiles$: Observable<any>;
 
   public imageSrc;
   public source: string;
@@ -67,13 +68,20 @@ export class CreateDiagramComponent {
       ).subscribe((fileContent) => {
         if (fileContent) {
           this.exampleFile = {
-            data: fileContent,
-            columns: Object.keys(fileContent[0]),
+            data: fileContent.content,
+            columns: Object.keys(fileContent.content[0]),
           };
         }
       });
     this.exampleDatasets$ = this.apiFileService.listExampleDatasets();
     this.exampleFiles$ = this.apiFileService.listExampleFiles();
+
+    if (this.authService.isLoggedIn()) {
+      this.refreshUserFileList();
+    }
+  }
+  public refreshUserFileList() {
+    this.userFiles$ = this.apiFileService.listUserFiles().pipe(tap(res => console.log(res)));
   }
 
   onDatasetSelected(event) {
@@ -87,8 +95,8 @@ export class CreateDiagramComponent {
         console.log('setting selectedFile to null');
         this.selectedFile = null;
         this.selectedFile = {
-          data: fileContent,
-          columns: Object.keys(fileContent[0]),
+          data: fileContent.content,
+          columns: Object.keys(fileContent.content[0]),
         };
       })
     ).subscribe();

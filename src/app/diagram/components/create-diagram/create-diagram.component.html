@@ -36,7 +36,11 @@
         <div class="own-file-container" fxLayout="row" fxLayoutAlign="space-evenly center">
             <p *ngxPermissionsOnly="[roles.Guest]"><a (click)="onRegister()">Sign up</a> or <a (click)="onLogin()">sign in</a> to work with your dataset</p>
             <div *ngxPermissionsOnly="[roles.Basic]">
-              Logged in content here 
+              <app-file-list
+                *ngIf="(userFiles$ | async) as files"
+                [dataSource]="files"
+                owner="user"
+            ></app-file-list>
             </div>  
         </div>
       </mat-tab>

@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CustomHttpClient } from 'src/app/core/services/custom-http-client.service';
 import { IDatasets } from 'utils/interfaces/diagram/dataset-list.interface';
+import { IReadFileResponse } from 'utils/payloads/file/read-file.interface';
+import { IFileStat } from 'utils/payloads/file/stat.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +27,7 @@ export class ApiFileService {
     return this.httpClient.post(this.apiUrl, 'file',  formData);
   }
 
-  public readFile(filename: string, rows: number = 5, page: number = 0): Observable<any> {
+  public readFile(filename: string, rows: number = 5, page: number = 0): Observable<IReadFileResponse> {
     const params = new HttpParams()
       .append('filename', filename)
       .append('rows', String(rows))
@@ -33,7 +35,13 @@ export class ApiFileService {
     return this.httpClient.get(this.apiUrl, 'file', { params });
   }
 
-  public readExampleFile(filename: string, rows: number = 5, page: number = 0): Observable<any> {
+  public readFileStat(filename: string): Observable<IFileStat> {
+    const params = new HttpParams()
+      .append('filename', filename);
+    return this.httpClient.get(this.apiUrl, 'file/stat', { params });
+  }
+
+  public readExampleFile(filename: string, rows: number = 5, page: number = 0): Observable<IReadFileResponse> {
     const params = new HttpParams()
       .append('filename', filename)
       .append('rows', String(rows))
@@ -53,7 +61,7 @@ export class ApiFileService {
     return this.httpClient.get(this.apiUrl, 'file/example/dataset/list');
   }
 
-  public readExampleDataset(source, datasetName, rows: number = 5, page: number = 0): Observable<any> {
+  public readExampleDataset(source, datasetName, rows: number = 5, page: number = 0): Observable<IReadFileResponse> {
     const params = new HttpParams()
       .append('source', source)
       .append('name', datasetName)
