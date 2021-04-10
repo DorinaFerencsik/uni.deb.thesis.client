@@ -28,7 +28,7 @@
         <ng-container *ngIf="(exampleFiles$ | async) as exampleFiles">
           <app-dataset-list
             [dataSource]="exampleFiles"
-            (datasetSelected)="onExampleFileSelected($event)"  
+            (datasetSelected)="onDatasetSelected($event)"  
         ></app-dataset-list>
         </ng-container>
       </mat-tab>
@@ -40,6 +40,8 @@
                 *ngIf="(userFiles$ | async) as files"
                 [dataSource]="files"
                 owner="user"
+                mode="use"
+                (fileSelected)="onFileSelected($event)" 
             ></app-file-list>
             </div>  
         </div>

@@ -2,7 +2,18 @@
   <table mat-table [dataSource]="fileContent">
     <ng-container *ngFor="let disCol of columns; let colIndex = index" matColumnDef="{{disCol}}">
       <th mat-header-cell *matHeaderCellDef>
-        <div> {{disCol}} <span class="column-type">{{stats.stats[disCol].type}}</span></div>
+        <div>
+          <span class="column-name">{{disCol}}</span> 
+          <span *ngIf="stats" class="column-type">{{stats?.stats[disCol]?.type}}</span>
+        </div>
+        <app-categorical-stat
+          *ngIf="stats?.stats[disCol]?.type == 'Categorical' || stats?.stats[disCol]?.type == 'String'"
+          [stat]="stats.stats[disCol]"
+        ></app-categorical-stat>
+        <app-numeric-stat
+          *ngIf="stats?.stats[disCol]?.type == 'Float' || stats?.stats[disCol]?.type == 'Integer'"
+          [stat]="stats.stats[disCol]"
+        ></app-numeric-stat>
       </th>
       <td mat-cell *matCellDef="let element">{{element[disCol]}}</td>
     </ng-container>

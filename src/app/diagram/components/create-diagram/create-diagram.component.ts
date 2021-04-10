@@ -9,6 +9,7 @@ import { first, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { ApiFileService } from 'src/app/diagram/services/api-file.service';
 import { NameDialogComponent } from 'src/app/shared/components/name-dialog/name-dialog.component';
+import { FileOwner } from 'src/app/shared/enums/file-owner.enum';
 import { environment } from 'src/environments/environment';
 import { Roles } from 'utils/enums/user';
 import { IDiagramType } from 'utils/interfaces/diagram';
@@ -25,7 +26,7 @@ import { ApiDiagramService } from '../../services/api-diagram.service';
 })
 export class CreateDiagramComponent {
 
-  public roles = Roles;
+  public readonly roles = Roles;
   public diagramType: IDiagramType;
   public exampleFile: {
     data: any[],
@@ -62,7 +63,7 @@ export class CreateDiagramComponent {
         switchMap((diagramType) => {
           this.diagramType = diagramType;
           return this.diagramType.data
-            ? this.apiFileService.readExampleDataset(this.diagramType.data.source, this.diagramType.data.name)
+            ? this.apiFileService.readData(FileOwner.Example, this.diagramType.data.name, this.diagramType.data.source)
             : of(null);
         })
       ).subscribe((fileContent) => {
@@ -89,7 +90,7 @@ export class CreateDiagramComponent {
       source: event.source,
       name: event.name,
     };
-    this.apiFileService.readExampleDataset(event.source, event.name).pipe(
+    this.apiFileService.readData(FileOwner.Example, event.name, event.source).pipe(
       first(),
       tap(fileContent => {
         console.log('setting selectedFile to null');
@@ -107,7 +108,7 @@ export class CreateDiagramComponent {
       source: event.source,
       name: event.name,
     };
-    this.apiFileService.readExampleFile(event.name).pipe(
+    this.apiFileService.readData(FileOwner.Example, event.name).pipe(
       first(),
       tap(fileContent => {
         console.log('setting selectedFile to null');
@@ -125,7 +126,7 @@ export class CreateDiagramComponent {
     //   source: event.source,
     //   name: event.name,
     // };
-    this.apiFileService.readExampleFile(filename).pipe(
+    this.apiFileService.readData(FileOwner.User, filename).pipe(
       first(),
       tap(fileContent =>
         this.selectedFile = {

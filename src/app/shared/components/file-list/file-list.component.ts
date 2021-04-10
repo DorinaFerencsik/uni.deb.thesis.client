@@ -15,8 +15,10 @@ export class FileListComponent implements OnInit {
 
   @Input() dataSource: any[];
   @Input() owner: FileOwner;
+  @Input() mode: 'use' | 'manage' = 'use';
 
   @Output() fileSelected = new EventEmitter();
+  @Output() analyze = new EventEmitter();
 
   constructor(private dialog: MatDialog) { }
 
@@ -25,6 +27,13 @@ export class FileListComponent implements OnInit {
 
   public openPreview(filename: string) {
     this.dialog.open(DatasetPreviewDialogComponent, { data: { fileOwner: this.owner, name: filename }});
+  }
+
+  public onAnalyze(filename) {
+    this.analyze.emit({
+      owner: this.owner,
+      name: filename,
+    });
   }
 
 }

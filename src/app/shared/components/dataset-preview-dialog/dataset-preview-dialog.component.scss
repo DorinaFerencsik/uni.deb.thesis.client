@@ -1,4 +1,10 @@
-
+.mat-header-row {
+  vertical-align: top
+}
+.column-name {
+  font-size: 16px;
+  padding-right: 8px;
+}
 .column-type {
   padding: 5px;
   background: #efefef;

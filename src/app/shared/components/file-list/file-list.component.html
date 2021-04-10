@@ -23,8 +23,13 @@
         Preview
         <mat-icon>remove_red_eye</mat-icon>
       </button>
-      <button mat-flat-button (click)="fileSelected.emit(element.name)">
+      <button *ngIf="mode == 'use'" mat-flat-button (click)="fileSelected.emit(element.name)">
         Use this
+        <mat-icon>arrow_right_alt</mat-icon>
+      </button>
+
+      <button *ngIf="mode == 'manage'" mat-flat-button (click)="onAnalyze(element.name)">
+        Generate statistics
         <mat-icon>arrow_right_alt</mat-icon>
       </button>
     </td>

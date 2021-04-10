@@ -24,6 +24,9 @@ export class DatasetPreviewDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { fileOwner: FileOwner, name: string, source?: string },
     private dialogRef: MatDialogRef<DatasetPreviewDialogComponent>,
     private fileService: ApiFileService) {
+      this.fileService.readStat(this.data.fileOwner, this.data.name, this.data.source).subscribe(res => {
+        this.stats = res;
+      });
       this.readData();
     }
 
@@ -41,31 +44,17 @@ export class DatasetPreviewDialogComponent implements OnInit {
   }
 
   private readData() {
-
-    if (this.data.fileOwner === FileOwner.User) {
-      combineLatest([
-        this.fileService.readFile(this.data.name, this.pagination.rows, this.pagination.page),
-        this.fileService.readFileStat(this.data.name),
-      ]).subscribe(([fileContent, stat]) => {
-          this.stats = stat;
-          this.columns = Object.keys(fileContent.content[0]);
-          this.fileContent = fileContent.content;
-          this.pagination.totalRows = fileContent.maxRows;
-      });
-    } else {
-      let obs = new Observable<IReadFileResponse>();
-      if (this.data.source) {
-        obs = this.fileService.readExampleDataset(this.data.source, this.data.name, this.pagination.rows, this.pagination.page);
-      } else {
-        obs = this.fileService.readExampleFile(this.data.name, this.pagination.rows, this.pagination.page);
-      }
-
-      obs.subscribe(res => {
-        this.columns = Object.keys(res.content[0]);
-        this.fileContent = res.content;
-        this.pagination.totalRows = res.maxRows;
-      });
-    }
+    this.fileService.readData(
+      this.data.fileOwner,
+      this.data.name,
+      this.data.source,
+      this.pagination.rows,
+      this.pagination.page
+    ).subscribe(res => {
+      this.columns = Object.keys(res.content[0]);
+      this.fileContent = res.content;
+      this.pagination.totalRows = res.maxRows;
+    });
   }
 
 }

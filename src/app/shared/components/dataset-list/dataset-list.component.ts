@@ -16,7 +16,9 @@ import { DatasetPreviewDialogComponent } from '../dataset-preview-dialog/dataset
 export class DatasetListComponent implements OnInit {
 
   @Input() dataSource: IDatasets;
+  @Input() mode: 'use' | 'manage' = 'use';
   @Output() datasetSelected = new EventEmitter();
+  @Output() analyze = new EventEmitter();
 
   @ViewChild('panel') panel: MatExpansionPanel;
 
@@ -52,6 +54,14 @@ export class DatasetListComponent implements OnInit {
     this.panel.close();
     this.datasetSelected.emit({
       name: datasetName,
+      source: this.dataSource.source,
+    });
+  }
+
+  public onAnalyze(filename) {
+    this.analyze.emit({
+      owner: FileOwner.Example,
+      name: filename,
       source: this.dataSource.source,
     });
   }

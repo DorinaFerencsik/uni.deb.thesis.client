@@ -26,6 +26,7 @@ import { NgxFilesizeModule } from 'ngx-filesize';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { NgxPermissionsModule } from 'ngx-permissions';
 
+import { CategoricalStatComponent } from './components/categorical-stat/categorical-stat.component';
 import { CodeBlockComponent } from './components/code-block/code-block.component';
 import { DatasetListComponent } from './components/dataset-list/dataset-list.component';
 import { DatasetPreviewDialogComponent } from './components/dataset-preview-dialog/dataset-preview-dialog.component';
@@ -37,6 +38,7 @@ import { DropdownComponent } from './components/inputs/dropdown/dropdown.compone
 import { SubmitButtonComponent } from './components/inputs/submit-button/submit-button.component';
 import { TextInputComponent } from './components/inputs/text-input/text-input.component';
 import { NameDialogComponent } from './components/name-dialog/name-dialog.component';
+import { NumericStatComponent } from './components/numeric-stat/numeric-stat.component';
 import { SpaceComponent } from './components/space/space.component';
 import { DynamicFieldDirective } from './directives/dynamic-field.directive';
 import { ImageFallbackDirective } from './directives/image-fallback.directive';
@@ -55,6 +57,8 @@ const components = [
   DatasetPreviewDialogComponent,
   NameDialogComponent,
   ArrayInputComponent,
+  NumericStatComponent,
+  CategoricalStatComponent,
 ];
 
 const directives = [
