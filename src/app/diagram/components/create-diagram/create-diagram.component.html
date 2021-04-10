@@ -53,6 +53,10 @@
     <p>Selected dataset</p>
     <app-file-content [value]="selectedFile"></app-file-content>
     <app-space></app-space>
+    <mat-checkbox [(ngModel)]="excludeNull"
+        color="primary">
+      Exclude rows where any of the used columns contains NULL
+    </mat-checkbox>
     <app-parameter-card
       [params]="diagramType.params"
       [fileColNames]="selectedFile.columns"

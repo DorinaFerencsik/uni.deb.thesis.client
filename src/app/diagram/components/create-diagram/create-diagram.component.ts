@@ -41,6 +41,7 @@ export class CreateDiagramComponent {
 
   public imageSrc;
   public source: string;
+  public excludeNull = false;
 
   private readonly typeId: string;
   private selectedDataSource: IDataSource;
@@ -149,6 +150,7 @@ export class CreateDiagramComponent {
       data: this.selectedDataSource,
       params: event,
       format: 'png',
+      excludeNull: this.excludeNull,
     }).subscribe(res => {
       this.imageSrc = this.sanitizer.bypassSecurityTrustUrl(res.result);
       this.source = res.source;
