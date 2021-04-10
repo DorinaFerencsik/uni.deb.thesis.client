@@ -6,6 +6,7 @@ import { CreateDiagramComponent } from './components/create-diagram/create-diagr
 import { DiagramAdminComponent } from './components/diagram-admin/diagram-admin.component';
 import { DiagramCardComponent } from './components/diagram-card/diagram-card.component';
 import { DiagramListComponent } from './components/diagram-list/diagram-list.component';
+import { DiagramComponent } from './components/diagram/diagram.component';
 import { ExampleListComponent } from './components/example-list/example-list.component';
 import { ParameterCardComponent } from './components/parameter-card/parameter-card.component';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
@@ -22,6 +23,7 @@ import { DiagramRoutingModule } from './diagram-routing.module';
     UploadFileComponent,
     UserFilesComponent,
     DiagramAdminComponent,
+    DiagramComponent,
   ],
   imports: [
     SharedModule,

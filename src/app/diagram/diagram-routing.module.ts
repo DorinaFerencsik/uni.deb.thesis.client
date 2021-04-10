@@ -6,6 +6,7 @@ import { Roles } from 'utils/enums/user';
 import { CreateDiagramComponent } from './components/create-diagram/create-diagram.component';
 import { DiagramAdminComponent } from './components/diagram-admin/diagram-admin.component';
 import { DiagramListComponent } from './components/diagram-list/diagram-list.component';
+import { DiagramComponent } from './components/diagram/diagram.component';
 import { ExampleListComponent } from './components/example-list/example-list.component';
 import { UserFilesComponent } from './components/user-files/user-files.component';
 
@@ -37,6 +38,10 @@ const routes: Routes = [
             redirectTo: 'landing',
           },
         },
+      },
+      {
+        path: ':id',
+        component: DiagramComponent,
       },
     ],
   },

@@ -20,8 +20,10 @@ export class DiagramCardComponent implements OnInit {
   @Input() filename: string;
   @Input() params: IDiagramParam[] = [];
   @Input() order: string;
+  @Input() showUseButton = true;
 
   @Output() tagSelected = new EventEmitter();
+  @Output() details = new EventEmitter();
 
   constructor(public router: Router, public sanitizer: DomSanitizer, private httpClient: HttpClient) {
 

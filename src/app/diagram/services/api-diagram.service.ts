@@ -14,11 +14,11 @@ export class ApiDiagramService {
 
   constructor(private httpClient: CustomHttpClient) { }
 
-  public getUserDiagramList() {
-    return this.httpClient.get(this.apiUrl, 'diagram');
+  public getUserDiagramList(diagramName: string): Observable<IUserDiagram[]> {
+    return this.httpClient.post(this.apiUrl, 'diagram', {name: diagramName});
   }
 
-  public getUserDiagramById(diagramId: string) {
+  public getUserDiagramById(diagramId: string): Observable<IUserDiagram> {
     return this.httpClient.get(this.apiUrl, `diagram/${diagramId}`);
   }
 
