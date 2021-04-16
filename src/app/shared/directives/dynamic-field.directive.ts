@@ -1,6 +1,7 @@
 import { ComponentFactoryResolver, Directive, Input, OnInit, ViewContainerRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
+import { ArrayInputComponent } from '../components/inputs/array-input/array-input.component';
 import { DropdownComponent } from '../components/inputs/dropdown/dropdown.component';
 import { SubmitButtonComponent } from '../components/inputs/submit-button/submit-button.component';
 import { TextInputComponent } from '../components/inputs/text-input/text-input.component';
@@ -10,6 +11,7 @@ const componentMapper = {
   textInput: TextInputComponent,
   dropdown: DropdownComponent,
   submitButton: SubmitButtonComponent,
+  arrayInput: ArrayInputComponent,
 };
 
 @Directive({

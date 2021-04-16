@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { DynamicFormComponent } from 'src/app/shared/components/dynamic-form/dynamic-form.component';
 import { IFieldConfig } from 'src/app/shared/interfaces/field-config.interface';
+import { DATA_COLUMN_PARAM } from 'utils/constants/diagrams';
 import { IDiagramParam } from 'utils/interfaces/diagram';
 
 @Component({
@@ -8,7 +10,9 @@ import { IDiagramParam } from 'utils/interfaces/diagram';
   templateUrl: './parameter-card.component.html',
   styleUrls: ['./parameter-card.component.scss'],
 })
-export class ParameterCardComponent implements OnInit {
+export class ParameterCardComponent implements OnInit, OnChanges {
+
+  @ViewChild('myForm', {static: false}) myForm: DynamicFormComponent;
 
   @Input() params: IDiagramParam[];
   @Input() fileColNames: string[];
@@ -21,21 +25,27 @@ export class ParameterCardComponent implements OnInit {
     label: 'Generate',
   }];
 
-  private readonly columnDropdownFields = ['x', 'y', 'z', 'hue', 'style', 'size'];
-
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges() {
     this.fields = this.params.map(param => ({
       ...param,
+      value: param.type !== 'dropdown' ? param.value : null,
       validations: param.validations?.map(v => ({
         name: v.type,
         validator: this.mapValidator(v.type, v.value),
-        message: `COMNMON.ERROR.${v.type}`,
+        message: `COMMON.ERROR.${v.type}`,
         messageParam: v.value,
       })),
       options: param.type === 'dropdown' ? this.matDropdownOptions(param.name, param.options) : null,
     }));
+    console.log('parameter card onchange');
+    if (this.myForm) {
+      this.myForm.resetForm();
+    }
   }
 
   submit(value: any) {
@@ -55,9 +65,12 @@ export class ParameterCardComponent implements OnInit {
   }
 
   private matDropdownOptions(fieldName: string, options?: string[]) {
-    if (this.columnDropdownFields.includes(fieldName)) {
+    if (options && options[0] === DATA_COLUMN_PARAM) {
       return this.fileColNames;
     }
+    // if (this.columnDropdownFields.includes(fieldName)) {
+    //   return this.fileColNames;
+    // }
     return options;
   }
 

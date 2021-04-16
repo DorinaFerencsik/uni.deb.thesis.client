@@ -1,14 +1,14 @@
 <div class="content" *ngIf="diagramType">
-  
+
   <app-diagram-card
     [id]="diagramType._id"
     [name]="diagramType.name"
     [desc]="diagramType.desc"
-    [image]="'/assets/images/examples/' + diagramType.type + '.png'"
+    [image]="imgUrl"
     [tags]="diagramType.tags"
     [filename]="diagramType.data.name"
     [params]="diagramType.params"
-    order="row"
+    order="row-reverse"
   ></app-diagram-card>
   <app-space></app-space>
 
@@ -25,17 +25,25 @@
             (datasetSelected)="onDatasetSelected($event)"  
           ></app-dataset-list>
         </ng-container>
+        <ng-container *ngIf="(exampleFiles$ | async) as exampleFiles">
+          <app-dataset-list
+            [dataSource]="exampleFiles"
+            (datasetSelected)="onDatasetSelected($event)"  
+        ></app-dataset-list>
+        </ng-container>
       </mat-tab>
       <mat-tab label="Use own dataset">
         <div class="own-file-container" fxLayout="row" fxLayoutAlign="space-evenly center">
-
-          <div class="upload-area" fxFlex="40">
-            <p>Upload file</p>
-          </div>
-          <div class="horizontal-divider"></div>
-          <div fxFlex="40">
-            <p>Or sign in to browse previously uploaded files </p>
-          </div>
+            <p *ngxPermissionsOnly="[roles.Guest]"><a (click)="onRegister()">Sign up</a> or <a (click)="onLogin()">sign in</a> to work with your dataset</p>
+            <div *ngxPermissionsOnly="[roles.Basic]">
+              <app-file-list
+                *ngIf="(userFiles$ | async) as files"
+                [dataSource]="files"
+                owner="user"
+                mode="use"
+                (fileSelected)="onFileSelected($event)" 
+            ></app-file-list>
+            </div>  
         </div>
       </mat-tab>
     </mat-tab-group>
@@ -45,11 +53,16 @@
     <p>Selected dataset</p>
     <app-file-content [value]="selectedFile"></app-file-content>
     <app-space></app-space>
+    <mat-checkbox [(ngModel)]="excludeNull"
+        color="primary">
+      Exclude rows where any of the used columns contains NULL
+    </mat-checkbox>
     <app-parameter-card
       [params]="diagramType.params"
       [fileColNames]="selectedFile.columns"
       (formSubmit)="onSubmit($event)"
     ></app-parameter-card>
+    <button mat-button (click)="saveDiagram()">Save</button>
   </ng-container>
 
   <ng-template #noFileSelected>

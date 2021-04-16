@@ -1,0 +1,19 @@
+
+<div class="center">
+  <ngx-file-drop 
+    dropZoneLabel="Drop files here OR "
+    accept=".csv"
+    [showBrowseBtn]="true"
+    multiple="false"
+    (onFileDrop)="dropped($event)" 
+    (onFileOver)="fileOver($event)"
+    (onFileLeave)="fileLeave($event)">
+  </ngx-file-drop>
+  <div class="upload-table" *ngIf="file">
+    <h3>File to be uploaded:</h3>
+    <div fxLayout="row">
+      <p>{{file.relativePath}}</p>
+      <button mat-button (click)="uploadFile()">{{ 'COMMON.BUTTON.UPLOAD' | translate }}</button>
+    </div>
+  </div>
+</div>

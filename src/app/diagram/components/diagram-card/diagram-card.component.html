@@ -13,8 +13,8 @@
       <p *ngFor="let param of params">{{ param.label | translate }}: {{param.value}}</p>
     </div>
     <ng-template #actions>
-      <button mat-button>Details</button>
-      <button mat-button (click)="createFromType()">Use this</button>
+      <button mat-button (click)="details.emit(id)">Details</button>
+      <button *ngIf="showUseButton" mat-button (click)="createFromType()">Use this</button>
     </ng-template>
   </div>
 </div>

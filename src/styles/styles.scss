@@ -46,9 +46,22 @@ a {
   max-height: 100%;
 }
 
+p.no-result {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0 20px;
+}
+
 // MATERIAL
 // Table
 th, td, td {
   padding-left: 20px !important;
   padding-right: 20px !important;
+}
+
+mat-form-field.required-field {
+  .mat-form-field-label::after {
+    content: "*";
+    margin-left: 6px;
+  }
 }

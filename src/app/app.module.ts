@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -33,7 +34,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     HighlightModule,
     FlexLayoutModule,
-    NgxPermissionsModule.forRoot(), 
+    NgxPermissionsModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -56,6 +57,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true,
     },
   ],

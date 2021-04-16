@@ -1,0 +1,24 @@
+<div class="content" *ngIf="diagram">
+  <app-diagram-card
+    [id]="diagram._id"
+    [name]="diagram.name"
+    [desc]="diagram.desc"
+    [image]="''"
+    [tags]="diagram.tags"
+    [filename]="diagram.data.name"
+    [params]="diagram.params"
+    order="row-reverse"
+  ></app-diagram-card>
+  <app-space></app-space>
+
+  <div class="example" fxLayout="row" fxLayoutGap="20px">
+    <app-code-block
+      fxFlex="40"
+      [code]="source"
+      [title]="diagram.name"
+    ></app-code-block>
+    <div fxFlex="60">
+      <img [src]="''" class="diagram"/>
+    </div>
+  </div>
+</div>

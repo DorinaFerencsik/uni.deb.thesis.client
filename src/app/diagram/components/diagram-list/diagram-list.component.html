@@ -1,1 +1,16 @@
-<p>diagram-list works!</p>
+<div class="content">
+  <h1>Saved diagrams</h1>
+  <ng-container *ngFor="let diagram of diagrams; let i = index; trackBy: trackById">
+    <app-diagram-card
+      [id]="diagram._id"
+      [name]="diagram.name"
+      [desc]="diagram.desc"
+      [image]="'/assets/images/examples/' + diagram.type + '.png'"
+      [tags]="diagram.tags" 
+      [order]="i % 2 == 0 ? 'row' : 'row-reverse'"
+      [showUseButton]="false"
+      (details)="navigateToDetails($event)"
+    ></app-diagram-card>
+    <app-space></app-space>
+  </ng-container>
+</div>
