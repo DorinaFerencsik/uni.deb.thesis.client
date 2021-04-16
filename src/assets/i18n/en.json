@@ -2,9 +2,11 @@
   "COMMON": {
     "BUTTON": {
       "CLOSE": "Close",
+      "SUBMIT": "Ok",
       "CANCEL": "Cancel",
       "CREATE": "Create",
-      "DARK_MODE": "Dark mode"
+      "DARK_MODE": "Dark mode",
+      "UPLOAD": "Upload"
     },
     "ERROR": {
       "REQUIRED": "Required field",
@@ -21,5 +23,28 @@
         "PASSWORD": "Password"
       }
     }
+  },
+  "DIAGRAM": {
+    "SEPARATOR": {
+      "LABEL": "Separator"
+    },
+    "AXISX": {
+      "LABEL": "Axis X"
+    },
+    "AXISY": {
+      "LABEL": "Axis Y"
+    },
+    "HUE": {
+      "LABEL": "Hue"
+    },
+    "STYLE": {
+      "LABEL": "Style"
+    },
+    "SIZE": {
+      "LABEL": "Size"
+    }
+  },
+  "FILE": {
+    "TITLE": "My files"
   }
 }

@@ -1,0 +1,14 @@
+<mat-form-field fxFlex="100" [class.required-field]="isRequired">
+  <mat-chip-list #chipList >
+    <mat-chip *ngFor="let item of values" [selectable]="selectable"
+              [removable]="removable" (removed)="remove(item)">
+      {{item}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input [placeholder]="field.label | translate" [formControl]="innerControl" 
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+</mat-form-field>

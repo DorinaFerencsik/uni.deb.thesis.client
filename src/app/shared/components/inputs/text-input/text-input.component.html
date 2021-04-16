@@ -1,0 +1,8 @@
+<mat-form-field [formGroup]="group" fxFlex="100" [class.required-field]="isRequired">
+  <input matInput [formControlName]="field.name" [placeholder]="field.label | translate" [type]="field.inputType">
+  <ng-container *ngFor="let validation of field.validations;" ngProjectAs="mat-error">
+    <mat-error *ngIf="group.get(field.name).hasError(validation.name)">
+      {{ validation.message | translate }}
+    </mat-error>
+  </ng-container>
+</mat-form-field>

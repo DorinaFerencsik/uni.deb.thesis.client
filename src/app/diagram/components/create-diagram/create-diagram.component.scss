@@ -1,0 +1,21 @@
+
+
+table {
+  width: 100%;
+}
+
+.own-file-container {
+  height: 200px;
+
+  .upload-area {
+    text-align: center;
+    border: dashed 2px black;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .horizontal-divider {
+    border: 1px solid black;
+    height: 80%;
+  }
+}

@@ -1,0 +1,13 @@
+<p>
+  <span># non-NULL: {{stat.count}}</span>
+  <br>
+  <span>mean: {{stat.mean | number : '1.1-2'}}</span>
+  <br>
+  <span>standard deviation: {{stat.std | number : '1.1-2'}}</span>
+  <br>
+  <span>quantiles: {{stat.min | number : '1.1-2'}} / 
+    {{stat['25%'] | number : '1.1-2'}} / 
+    {{stat['50%'] | number : '1.1-2'}} / 
+    {{stat['75%'] | number : '1.1-2'}} / 
+    {{stat.max | number : '1.1-2'}}</span>
+</p>

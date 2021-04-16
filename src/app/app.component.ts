@@ -9,7 +9,9 @@ import { TranslateService } from '@ngx-translate/core';
 export class AppComponent {
   public title = 'uni-deb-thesis-client';
 
-  constructor(private translateService: TranslateService) {
+  constructor(
+    private translateService: TranslateService) {
     this.translateService.setDefaultLang('en');
+    this.translateService.use('en');
   }
 }

@@ -9,6 +9,7 @@ import { Component, Input } from '@angular/core';
 export class CodeBlockComponent {
 
   @Input() code: string;
+  @Input() title = 'Example diagram';
 
   constructor(private clipboard: Clipboard) { }
 

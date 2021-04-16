@@ -1,0 +1,41 @@
+<div class="content">
+  <h1>{{ "FILE.TITLE" | translate }}</h1>
+  <div fxLayout="row" fxLayout.lt-lg="column-reverse" fxLayoutGap="15px" fxLayoutGap.lt-lg="30px">
+
+    <div fxFlex.gt-md="70">
+
+      <app-file-list
+        *ngIf="(files$ | async) as files"
+        [dataSource]="files"
+        owner="user"
+        mode="manage"
+        (analyze)="analyzeFile($event)"
+     ></app-file-list>
+    </div>
+
+   <app-upload-file
+    fxFlex.gt-md="30" 
+    (fileUploaded)="refreshFileList()"></app-upload-file>
+  </div>
+
+  <div *ngxPermissionsOnly="[roles.Admin]">
+    <h1> Example datasets </h1>
+    <ng-container *ngFor="let source of (exampleDatasets$ | async)">
+      <app-dataset-list
+        [dataSource]="source"
+        mode="manage"
+        (analyze)="analyzeFile($event)"  
+      ></app-dataset-list>
+    </ng-container>
+    
+    <h1> Example files </h1>
+    <ng-container *ngIf="(exampleFiles$ | async) as exampleFiles">
+      <app-dataset-list
+        [dataSource]="exampleFiles"
+        mode="manage"
+        (analyze)="analyzeFile($event)"  
+    ></app-dataset-list>
+    </ng-container>
+  
+  </div>
+</div>

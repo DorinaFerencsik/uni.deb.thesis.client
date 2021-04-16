@@ -1,0 +1,56 @@
+<mat-expansion-panel #panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{dataSource.source}}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <table mat-table [dataSource]="paginated" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="columns">
+      <th mat-header-cell *matHeaderCellDef> Column names </th>
+      <td mat-cell *matCellDef="let element"> {{ element.columns.length }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="rows">
+      <th mat-header-cell *matHeaderCellDef> Rows </th>
+      <td mat-cell *matCellDef="let element"> {{ element.rows }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-flat-button (click)="previewDataset(element.name)">
+          Preview
+          <mat-icon>remove_red_eye</mat-icon>
+        </button>
+        <button *ngIf="mode == 'use'" mat-flat-button (click)="selectDataset(element.name)">
+          Use this
+          <mat-icon>arrow_right_alt</mat-icon>
+        </button>
+
+        <button *ngIf="mode == 'manage'" mat-flat-button (click)="onAnalyze(element.name)">
+          Generate statistics
+          <mat-icon>arrow_right_alt</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+  </table>
+  <app-space></app-space>
+  <mat-paginator
+      (page)="onPageChange($event)"
+      [pageSize]="paginationParams.rows"
+      [pageIndex]="paginationParams.page"
+      [pageSizeOptions]="[5, 10, 15, 50]"
+      [length]="paginationParams.totalRows || 0"
+      [showFirstLastButtons]="true"
+  ></mat-paginator>
+
+</mat-expansion-panel>
